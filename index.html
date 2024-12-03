@@ -1,0 +1,330 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Stereo4D">
+  <meta name="keywords" content="Stereo4D">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stereo4D</title>
+
+  <link rel="icon" type="image/x-icon" href="static/stereo_icon.ico">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="./static/css/slider.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/index.js"></script>
+<style>
+#interactive {
+  position: relative;
+  display: inline-block;
+  width: 768px;
+  aspect-ratio: 16/9;
+  max-width: 100%;
+}
+#interactive canvas, #interactive svg, #interactive #glfailed {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+}
+#interactive svg {
+  pointer-events: none;
+}
+#interactive #glfailed {
+  color: #f88;
+  background: black;
+  display: none;
+}
+.load img {
+  width: 128px;
+  height: 72px;
+  margin-right: 4px;
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title" style="margin-bottom:0rem">Stereo4D</h1>
+          <h3 class="title is-3 publication-title">Learning How Things Move in 3D from Internet Stereo Videos</h3>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://jinlinyi.github.io/">Linyi Jin</a><sup>1,2</sup></span>,&nbsp&nbsp&nbsp&nbsp
+            </span>
+            <span class="author-block">
+              <a href="https://research.google/people/RichardTucker/">Richard Tucker</a><sup>1</sup>,&nbsp&nbsp&nbsp&nbsp
+            </span>
+            <span class="author-block">
+              <a href="https://zhengqili.github.io/">Zhengqi Li</a><sup>1</sup></span>,&nbsp&nbsp&nbsp&nbsp
+            </span>
+            <span class="author-block">
+              <a href="https://cs.nyu.edu/~fouhey/">David Fouhey</a><sup>3</sup>,&nbsp&nbsp&nbsp&nbsp
+            </span>
+            <span class="author-block">
+              <a href="https://www.cs.cornell.edu/~snavely/">Noah Snavely</a><sup>1*</sup>,&nbsp&nbsp&nbsp&nbsp
+            </span>
+            <span class="author-block">
+              <a href="https://holynski.org/">Aleksander Hołyński</a><sup>1,4*</sup></span>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Google DeepMind</span>
+            &nbsp&nbsp&nbsp&nbsp
+            <span class="author-block"><sup>2</sup>University of Michigan</span>
+            &nbsp&nbsp&nbsp&nbsp
+            <span class="author-block"><sup>3</sup>New York University</span>
+            &nbsp&nbsp&nbsp&nbsp
+            <span class="author-block"><sup>4</sup>UC Berkeley</span>
+          </div>
+          <div>
+            (*: equal contribution)
+          </div>
+
+          <!-- <h1 style="font-size:24px;font-weight:bold">CVPR 2024 Best Paper Award</h1> -->
+    
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <!-- Supp Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Supp</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i> 
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+
+
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <center>
+      <video id="teaser" autoplay muted loop playsinline width="90%">
+        <source src="static/videos/gallery.mp4" type="video/mp4">
+      </video>
+      </center>
+      <div class="columns is-centered">
+        <div class="column is-centered">
+            <h3 class="subtitle has-text-centered">
+              <font size="3">
+              <strong>TL;DR</strong>: We present a framework for mining 3D scene trajectory and camera motion from hundreds of thousands of video clips.
+              </font>
+            </h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Learning to understand dynamic 3D scenes from imagery is crucial for applications ranging from robotics to scene reconstruction. Yet, unlike other problems where large-scale supervised training has enabled rapid progress, directly supervising methods for recovering 3D motion remains challenging due to the fundamental difficulty of obtaining ground truth annotations. 
+            We present a system for mining high-quality 4D reconstructions from internet stereoscopic, wide-angle videos. Our system fuses and filters the outputs of camera pose estimation, stereo depth estimation, and temporal tracking methods into high-quality dynamic 3D reconstructions. We use this method to generate large-scale data in the form of world-consistent, pseudo-metric 3D point clouds with long-term motion trajectories. We demonstrate the utility of this data by training a variant of \duster to predict structure and 3D motion from real-world image pairs, showing that training on our reconstructed data enables generalization to diverse real-world scenes.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+    <!-- Pipeline. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">How it works</h2>
+        <div class="content has-text-justified">
+          <center>
+          <video id="pipeline" autoplay muted loop playsinline width="90%">
+            <source src="static/videos/pipeline.mp4" type="video/mp4">
+          </video>
+          <p>
+            Data collection pipeline.
+          </p>
+          </center>
+        </div>
+      </div>
+    </div>
+    <!--/ Pipeline. -->
+    <!-- Track optimization. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Track optimization</h2>
+        <div class="image-comparison">
+          <div class="images-container">
+            <video class="before-image" autoplay muted loop playsinline>
+              <source src="static/videos/before2.mp4" type="video/mp4">
+            </video>
+            <video class="after-image" autoplay muted loop playsinline>
+              <source src="static/videos/after2.mp4" type="video/mp4">
+            </video>
+    
+            <div class="slider-line"></div>
+            <div class="slider-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
+                />
+              </svg>
+            </div>
+    
+            <input type="range" class="slider" min="0" max="100" />
+          </div>
+        </div>
+
+        <p>
+          Denoising tracks: Depth estimates are often noisy from one frame to another. This results in jittery or noisy 3D tracks. We propose a 3D track optimization process that removes this noise. 
+        </p>
+      </div>
+    </div>
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">DynaDUSt3R</h2>
+        <div class="content has-text-justified">
+          <center>
+          <video id="pipeline" autoplay muted loop playsinline width="90%">
+            <source src="static/videos/dynadust3r.mp4" type="video/mp4">
+          </video>
+          </center>
+          <div class="columns is-centered">
+            <div class="column is-centered">
+                <h3 class="subtitle has-text-centered">
+                  <font size="3">
+                  Given two images, DynaDUSt3R predicts a 3D point cloud for each, and a 3D trajectory map between the point clouds.
+                  </font>
+                </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<br>
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-four-fifths"><br><br>
+      <h2 class="title is-3">Acknowledgements</h3>
+      <div class="content has-text-justified">
+          Thanks to Kyle Genova, Andrew Liu, Jon Barron, Philip Henzler, Stan Szymanowicz, Ruiqi Gao, Qianqian Wang for helpful proofreading, comments and discussions.
+      </div>
+    </div>
+  </div>
+
+  </div>
+
+</section>
+
+ <br>
+
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{jin2024_Stereo4d,
+  title  = {Stereo4D: Learning How Things Move in 3D from Internet Stereo Videos},
+  author = {Jin, Linyi and Tucker, Richard and Li, Zhengqi and Fouhey, David and Snavely, Noah and Holynski, Aleksander},
+  year   = {2024}
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div align="center" class="container">
+<div class="columns is-centered">
+        <div class="content">
+            This website is borrowed from <a href="https://github.com/nerfies/nerfies.github.io">nerfies</a>. Thanks <a href="https://keunhong.com">Keunhong</a>!
+        </div>
+      </div>
+    </div>
+</footer>
+<script src="./static/js/slider.js"></script>
+
+</body>
+</html>
