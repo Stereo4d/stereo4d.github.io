@@ -27,3 +27,4 @@ slider.addEventListener("input", (e) => {
   sliderLine.style.left = sliderValue;
   sliderIcon.style.left = sliderValue;
 });
+

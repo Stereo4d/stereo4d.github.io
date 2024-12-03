@@ -228,10 +228,21 @@
         <h2 class="title is-3">Track optimization</h2>
         <div class="image-comparison">
           <div class="images-container">
-            <video class="before-image" autoplay muted loop playsinline>
+            <script>
+              let videos_to_load = 2;
+              function loadedVideo() {
+                videos_to_load--;
+                if (videos_to_load == 0) {
+                  for (const v of document.querySelectorAll('.syncstart')) {
+                    v.play();
+                  }
+                }
+              }
+            </script>
+            <video class="before-image syncstart" muted loop playsinline preload oncanplaythrough="loadedVideo()">
               <source src="static/videos/before2.mp4" type="video/mp4">
             </video>
-            <video class="after-image" autoplay muted loop playsinline>
+            <video class="after-image syncstart" muted loop playsinline preload oncanplaythrough="loadedVideo()">
               <source src="static/videos/after2.mp4" type="video/mp4">
             </video>
     
