@@ -29,11 +29,13 @@
 
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <!-- <link rel="stylesheet" href="./static/css/bulma-carousel.min.css"> -->
-  <!-- <link rel="stylesheet" href="./static/css/fontawesome.all.min.css"> -->
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="./static/css/slider.css">
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
+
+  <link rel="stylesheet" href="./static/css/app.css">
 
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
   <script defer src="./static/js/fontawesome.all.min.js"></script>
@@ -272,14 +274,46 @@
       </div>
     </div>
 
-    <div class="columns is-centered has-text-centered">
+    <div class="columns is-centered has-text-centered" id="dynadust3r_result">
       <div class="column is-four-fifths">
         <h2 class="title is-3">DynaDUSt3R</h2>
         <div class="content has-text-justified">
           <center>
-          <video id="pipeline" autoplay muted loop playsinline width="90%">
+          <!-- <video id="pipeline" autoplay muted loop playsinline width="90%">
             <source src="static/videos/dynadust3r.mp4" type="video/mp4">
-          </video>
+          </video> -->
+
+          <table style="margin-left: auto; margin-right: auto; width: 100%;">
+            <tr>
+                <th style="text-align: center;width: 30%;">Input image pair</th>
+                <!-- <th style="text-align: center;width: 30%;">Fixed View<br>Varying Time</th>
+                <th style="text-align: center;width: 30%;">Varying View<br>Fixed Time</th> -->
+                <th style="text-align: center;width: 70%;">Reconstruction</th>
+            </tr>
+            <tr>
+                <td style="text-align: center;width: 37%;">
+                  <img class="card-img" id="dynadust3r_input" src="static/videos/dynadust3r/cow/input.gif">
+                </td>
+                <td rowspan="1" colspan="2" style="width: 63%">
+                    <video id="dynadust3r_prediction" class="video" width=100% loop playsinline
+                        autoplay muted controls>
+                        <source src="static/videos/dynadust3r/cow/cow_fixed_horizon-fix.mp4" />
+                    </video>
+                </td>
+            </tr>
+          </table>
+
+          <div class="pill-row scene-pills" id="cameratime-pills" role="group" aria-relevant="additions text">
+            <div class="pill scene-pill" data-value="cow">
+                <img class="card-img" src="static/videos/dynadust3r/cow/rgb_00000.png">
+            </div>
+            <div class="pill scene-pill" data-value="park">
+                <img class="card-img" src="static/videos/dynadust3r/park/rgb_00000.png">
+            </div>
+            <div class="pill scene-pill" data-value="rolling">
+                <img class="card-img" src="static/videos/dynadust3r/rolling/rgb_00000.png">
+            </div>
+          </div>
           </center>
           <div class="columns is-centered">
             <div class="column is-centered">
@@ -293,6 +327,39 @@
         </div>
       </div>
     </div>
+
+  <script>
+      compareDiv = document.querySelector("#dynadust3r_result")
+      activeScene_cameratime = "cow"
+
+      const methodPills_cameratime = compareDiv.querySelectorAll('.method-pill');
+      const scenePills_cameratime = compareDiv.querySelectorAll(".scene-pill")
+      const showVideo_cameratime = compareDiv.querySelector('#dynadust3r_prediction')
+      const showGif_cameratime = compareDiv.querySelector('#dynadust3r_input')
+
+      for (scenePill of scenePills_cameratime) {
+          scenePill.addEventListener('click', function () {
+              activeScene_cameratime = this.getAttribute('data-value');
+              updateDisplayCameraTime();
+          });
+      }
+
+      function updateDisplayCameraTime() {
+          for (scenePill of scenePills_cameratime) {
+              if (scenePill.getAttribute('data-value') == activeScene_cameratime) {
+                  scenePill.classList.add('active');
+              } else {
+                  scenePill.classList.remove('active')
+              }
+          }
+          showVideo_cameratime.src = `static/videos/dynadust3r/${activeScene_cameratime}/${activeScene_cameratime}_fixed_horizon-fix.mp4`
+          showVideo_cameratime.playbackRate = 2.0;
+          showGif_cameratime.src = `static/videos/dynadust3r/${activeScene_cameratime}/input.gif`
+      }
+      // Update initial display
+      updateDisplayCameraTime()
+
+  </script>
 
 <br>
   <div class="columns is-centered has-text-centered">
