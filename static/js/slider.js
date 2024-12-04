@@ -1,26 +1,13 @@
-// const slider = document.querySelector(".image-comparison .slider");
-// const afterImage = document.querySelector(".image-comparison .after-image");
-// const sliderLine = document.querySelector(".image-comparison .slider-line");
-// const sliderIcon = document.querySelector(".image-comparison .slider-icon");
-
-// // Listen for slider input changes
-// slider.addEventListener("input", (e) => {
-//   const sliderValue = e.target.value + "%";
-
-//   // Dynamically adjust the clip-path of the after-image
-//   afterImage.style.clipPath = `inset(0 0 0 ${e.target.value}%)`;
-
-//   // Update the position of the slider line and icon
-//   sliderLine.style.left = sliderValue;
-//   sliderIcon.style.left = sliderValue;
-// });
+const sliderContainer = document.querySelector(".image-comparison");
 const slider = document.querySelector(".image-comparison .slider");
 const afterImage = document.querySelector(".image-comparison .after-image");
+const beforeImage = document.querySelector(".image-comparison .before-image");
 const sliderLine = document.querySelector(".image-comparison .slider-line");
 const sliderIcon = document.querySelector(".image-comparison .slider-icon");
 
 
-// Function to update slider elements
+
+// // Function to update slider elements
 function updateSlider(value) {
   const sliderValue = value + "%";
 
@@ -32,15 +19,22 @@ function updateSlider(value) {
   sliderIcon.style.left = sliderValue;
 }
 
-// Listen for slider input changes
-slider.addEventListener("input", (e) => {
-  updateSlider(e.target.value);
-});
-
 // Initialize the slider on page load
 document.addEventListener("DOMContentLoaded", () => {
   updateSlider(slider.value); // Set positions based on the current slider value
 });
+
+// Function to update the slider position based on mouse hover
+function updateSliderHover(event) {
+  const rect = sliderContainer.getBoundingClientRect(); // Get the bounding box of the container
+  const mouseX = event.clientX - rect.left; // Calculate the mouse X position relative to the container
+  const percentage = Math.max(0, Math.min(100, (mouseX / rect.width) * 100)); // Ensure value is between 0 and 100
+  updateSlider(percentage)
+}
+
+// Attach the mousemove event listener to the container
+sliderContainer.addEventListener("mousemove", updateSliderHover);
+
 // Function to check if all videos are ready to play
 function videoLoaded() {
   videosToLoad--;
