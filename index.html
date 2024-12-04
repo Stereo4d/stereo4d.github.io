@@ -226,45 +226,43 @@
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Track optimization</h2>
-        <div class="image-comparison">
-          <div class="images-container">
-            <script>
-              let videos_to_load = 2;
-              function loadedVideo() {
-                videos_to_load--;
-                if (videos_to_load == 0) {
-                  for (const v of document.querySelectorAll('.syncstart')) {
-                    v.play();
-                  }
-                }
-              }
-            </script>
-            <video class="before-image syncstart" muted loop playsinline preload oncanplaythrough="loadedVideo()">
-              <source src="static/videos/before2.mp4" type="video/mp4">
+        <div class="columns is-centered is-vcentered">
+          <div class="column is-two-fifths">
+            <!-- Left Video -->
+            <video class="syncstart" muted loop playsinline preload="auto">
+              <source src="static/videos/track_optimization/projected.mp4" type="video/mp4">
             </video>
-            <video class="after-image syncstart" muted loop playsinline preload oncanplaythrough="loadedVideo()">
-              <source src="static/videos/after2.mp4" type="video/mp4">
-            </video>
-    
-            <div class="slider-line"></div>
-            <div class="slider-icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-6 h-6"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
-                />
-              </svg>
+          </div>
+          <div class="column is-three-fifths">
+            <!-- Slider Comparison -->
+            <div class="image-comparison">
+              <div class="images-container">
+                <video class="before-image syncstart" muted loop playsinline preload="auto">
+                  <source src="static/videos/track_optimization/after.mp4" type="video/mp4">
+                </video>
+                <video class="after-image syncstart" muted loop playsinline preload="auto">
+                  <source src="static/videos/track_optimization/before.mp4" type="video/mp4">
+                </video>
+                <div class="slider-line"></div>
+                <div class="slider-icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
+                    />
+                  </svg>
+                </div>
+                <input type="range" class="slider" min="1" max="99" />
+              </div>
             </div>
-    
-            <input type="range" class="slider" min="1" max="99" />
           </div>
         </div>
 
