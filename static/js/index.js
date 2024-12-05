@@ -1,4 +1,4 @@
-window.addEventListener('load', () => {
+document.addEventListener('DOMContentLoaded', () => {
   var options = {
     slidesToScroll: 1,
     slidesToShow: 3,
