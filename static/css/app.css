@@ -1,4 +1,6 @@
-
+.card-img {
+  vertical-align: bottom;
+}
 .pill {
   cursor: pointer;
   padding: 2px;

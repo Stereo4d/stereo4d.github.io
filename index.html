@@ -28,7 +28,7 @@
         rel="stylesheet">
 
   <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <!-- <link rel="stylesheet" href="./static/css/bulma-carousel.min.css"> -->
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="./static/css/slider.css">
   <link rel="stylesheet"
@@ -36,11 +36,15 @@
   <link rel="stylesheet" href="./static/css/index.css">
 
   <link rel="stylesheet" href="./static/css/app.css">
+  
 
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <!-- <script src="./static/js/bulma-carousel.min.js"></script> -->
-  <!-- <script src="./static/js/index.js"></script> -->
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/index.js"></script>
+
+
+
 <style>
 #interactive {
   position: relative;
@@ -82,7 +86,8 @@
           <h3 class="title is-3 publication-title">Learning How Things Move in 3D from Internet Stereo Videos</h3>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a href="https://jinlinyi.github.io/">Linyi Jin</a><sup>1,2</sup></span>,&nbsp&nbsp&nbsp&nbsp
+              <a href="https://jinlinyi.github.io/">Linyi Jin</a><sup>
+                <img src="static/gdm.ico" width="15"></sup></span>,&nbsp&nbsp&nbsp&nbsp
             </span>
             <span class="author-block">
               <a href="https://research.google/people/RichardTucker/">Richard Tucker</a><sup>1</sup>,&nbsp&nbsp&nbsp&nbsp
@@ -94,10 +99,10 @@
               <a href="https://cs.nyu.edu/~fouhey/">David Fouhey</a><sup>3</sup>,&nbsp&nbsp&nbsp&nbsp
             </span>
             <span class="author-block">
-              <a href="https://www.cs.cornell.edu/~snavely/">Noah Snavely</a><sup>1*</sup>,&nbsp&nbsp&nbsp&nbsp
+              <a href="https://www.cs.cornell.edu/~snavely/">Noah Snavely</a><sup>1✨</sup>,&nbsp&nbsp&nbsp&nbsp
             </span>
             <span class="author-block">
-              <a href="https://holynski.org/">Aleksander Hołyński</a><sup>1,4*</sup></span>
+              <a href="https://holynski.org/">Aleksander Hołyński</a><sup>1,4✨</sup></span>
             </span>
           </div>
 
@@ -111,7 +116,7 @@
             <span class="author-block"><sup>4</sup>UC Berkeley</span>
           </div>
           <div>
-            (*: equal contribution)
+            (✨: equal contribution)
           </div>
 
           <!-- <h1 style="font-size:24px;font-weight:bold">CVPR 2024 Best Paper Award</h1> -->
@@ -192,6 +197,46 @@
 </section>
 
 
+
+<section class="hero is-light is-small">
+  <div class="hero-body nopadding">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay playsinline muted loop height="450px" width="auto">
+            <source src="static/videos/stereo4d-gallery/207Wvni3ujI-clip9.mp4"
+                    type="video/mp4">
+          </video>
+	<br>
+          <video poster="" id="fullbody" autoplay playsinline muted loop height="288px">
+            <source src="static/videos/stereo4d-gallery/207Wvni3ujI-clip9.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body nopadding">
+    <div class="container">
+      </div>
+      <h3 class="subtitle has-text-centered">
+        <font size="2">
+        <span class="dnerf"> </span> 
+        Our method automatically turns single still images into seamless looping videos. </font>
+      </h3>
+
+    </div>
+  </div>
+</section>
+
+
 <section class="section">
   <div class="container is-max-desktop">
     <!-- Abstract. -->
@@ -212,67 +257,89 @@
       <div class="column is-four-fifths">
         <h2 class="title is-3">How it works</h2>
         <div class="content has-text-justified">
+          <p>
+          We identify online, stereoscopic fisheye videos (often referred to as VR180 videos) as an untapped source of data for leaning motion. 
+          These videos, designed to capture immersive VR experiences, provide wide field-of-view stereo imagery with a standardized stereo baseline. 
+          </p>
           <center>
           <video id="pipeline" autoplay muted loop playsinline width="90%">
-            <source src="static/videos/pipeline.mp4" type="video/mp4">
+            <source src="static/videos/pipeline/vr180s.mp4" type="video/mp4">
           </video>
-          <p>
-            Data collection pipeline.
-          </p>
           </center>
+        </div>
+        <div class="content has-text-justified">
+          <p>
+          We present a pipeline that carefully combines state-of-the-art methods for stereo depth estimation and video tracking along with custom structure-from-motion methods that are optimized for dynamic scenes.
+          At a high-level, our pipeline estimates camera poses, stereo disparity, and 2D tracks from rectified video clips.
+          </p>
+          <center>
+          <video id="pipeline" autoplay muted loop playsinline width="100%">
+            <source src="static/videos/pipeline/pipeline_stage1.mp4" type="video/mp4">
+          </video>
+          </center>
+        </div>
+        <div class="content has-text-justified">
+          <p>
+          We then fuse these quantities into a consistent 3D coordinate frame and get temporal consistent, high-quality reconstructions.
+          </p>
+          <center>
+          <video id="pipeline" autoplay muted loop playsinline width="100%">
+            <source src="static/videos/pipeline/9F_CaOaT9Xg-clip0-dyna_3dtrack_concated.mp4" type="video/mp4">
+          </video>
+          </center>
+        </div>
+
+
+        <div class="content has-text-justified">
+          <p>
+          To curate 3D data effectively, we need to do several things correct for optimal results. 
+          </p>
+          <p>
+            Denoising tracks: Depth estimates are often noisy from one frame to another. This results in jittery or noisy 3D tracks. We propose a 3D track optimization process that removes this noise. 
+          </p>
+          </div>
+          <div class="columns is-centered is-vcentered">
+            <div class="column is-two-fifths">
+              <!-- Left Video -->
+              <video class="syncstart" muted loop playsinline preload="auto">
+                <source src="static/videos/track_optimization/projected.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="column is-three-fifths">
+              <!-- Slider Comparison -->
+              <div class="image-comparison">
+                <div class="images-container">
+                  <video class="before-image syncstart" muted loop playsinline preload="auto">
+                    <source src="static/videos/track_optimization/after3.mp4" type="video/mp4">
+                  </video>
+                  <video class="after-image syncstart" muted loop playsinline preload="auto">
+                    <source src="static/videos/track_optimization/before3.mp4" type="video/mp4">
+                  </video>
+                  <div class="slider-line"></div>
+                  <div class="slider-icon">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="w-6 h-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
+                      />
+                    </svg>
+                  </div>
+                  <input type="range" class="slider" min="1" max="99" />
+                </div>
+              </div>
+            </div>
         </div>
       </div>
     </div>
     <!--/ Pipeline. -->
-    <!-- Track optimization. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Track optimization</h2>
-        <div class="columns is-centered is-vcentered">
-          <div class="column is-two-fifths">
-            <!-- Left Video -->
-            <video class="syncstart" muted loop playsinline preload="auto">
-              <source src="static/videos/track_optimization/projected.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="column is-three-fifths">
-            <!-- Slider Comparison -->
-            <div class="image-comparison">
-              <div class="images-container">
-                <video class="before-image syncstart" muted loop playsinline preload="auto">
-                  <source src="static/videos/track_optimization/after.mp4" type="video/mp4">
-                </video>
-                <video class="after-image syncstart" muted loop playsinline preload="auto">
-                  <source src="static/videos/track_optimization/before.mp4" type="video/mp4">
-                </video>
-                <div class="slider-line"></div>
-                <div class="slider-icon">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="w-6 h-6"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
-                    />
-                  </svg>
-                </div>
-                <input type="range" class="slider" min="1" max="99" />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <p>
-          Denoising tracks: Depth estimates are often noisy from one frame to another. This results in jittery or noisy 3D tracks. We propose a 3D track optimization process that removes this noise. 
-        </p>
-      </div>
-    </div>
 
     <div class="columns is-centered has-text-centered" id="dynadust3r_result">
       <div class="column is-four-fifths">
@@ -285,10 +352,10 @@
 
           <table style="margin-left: auto; margin-right: auto; width: 100%;">
             <tr>
-                <th style="text-align: center;width: 30%;">Input image pair</th>
+                <th style="text-align: center;width: 30%; border:none">Input image pair</th>
                 <!-- <th style="text-align: center;width: 30%;">Fixed View<br>Varying Time</th>
                 <th style="text-align: center;width: 30%;">Varying View<br>Fixed Time</th> -->
-                <th style="text-align: center;width: 70%;">Reconstruction</th>
+                <th style="text-align: center;width: 70%; border:none">Reconstruction</th>
             </tr>
             <tr>
                 <td style="text-align: center;width: 37%;">
