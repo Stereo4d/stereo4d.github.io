@@ -36,6 +36,7 @@
   <link rel="stylesheet" href="./static/css/index.css">
 
   <link rel="stylesheet" href="./static/css/app.css">
+  <link rel="stylesheet" href="./static/css/stack_video.css">
   
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -86,8 +87,7 @@
           <h3 class="title is-3 publication-title">Learning How Things Move in 3D from Internet Stereo Videos</h3>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a href="https://jinlinyi.github.io/">Linyi Jin</a><sup>
-                <img src="static/gdm.ico" width="15"></sup></span>,&nbsp&nbsp&nbsp&nbsp
+              <a href="https://jinlinyi.github.io/">Linyi Jin</a><sup>1</sup></span>,&nbsp&nbsp&nbsp&nbsp
             </span>
             <span class="author-block">
               <a href="https://research.google/people/RichardTucker/">Richard Tucker</a><sup>1</sup>,&nbsp&nbsp&nbsp&nbsp
@@ -99,10 +99,10 @@
               <a href="https://cs.nyu.edu/~fouhey/">David Fouhey</a><sup>3</sup>,&nbsp&nbsp&nbsp&nbsp
             </span>
             <span class="author-block">
-              <a href="https://www.cs.cornell.edu/~snavely/">Noah Snavely</a><sup>1✨</sup>,&nbsp&nbsp&nbsp&nbsp
+              <a href="https://www.cs.cornell.edu/~snavely/">Noah Snavely</a><sup>1*</sup>,&nbsp&nbsp&nbsp&nbsp
             </span>
             <span class="author-block">
-              <a href="https://holynski.org/">Aleksander Hołyński</a><sup>1,4✨</sup></span>
+              <a href="https://holynski.org/">Aleksander Hołyński</a><sup>1,4*</sup></span>
             </span>
           </div>
 
@@ -195,16 +195,34 @@
   </div>
 </section>
 
+<div class="video-container">
+  <video class="video-shadow" autoplay muted loop playsinline>
+    <source src="static/videos/stereo4d-gallery/207Wvni3ujI-clip9-2d.mp4" type="video/mp4">
+  </video>
+  <video class="video-main" autoplay muted loop playsinline>
+    <source src="static/videos/stereo4d-gallery/207Wvni3ujI-clip9.mp4" type="video/mp4">
+  </video>
+</div>
 
 <section class="hero is-light is-small">
   <div class="hero-body nopadding">
     <div class="container">
       <div id="results-carousel" class="carousel results-carousel">
         <div class="item item-fullbody">
-          <video poster="" autoplay playsinline muted loop height="450px" width="auto">
+          <!-- <video poster="" autoplay playsinline muted loop height="450px" width="auto">
             <source src="static/videos/stereo4d-gallery/207Wvni3ujI-clip9.mp4"
                     type="video/mp4">
-          </video>
+          </video> -->
+          <div poster="" class="item item-fullbody">
+            <div class="video-container">
+              <video class="video-shadow" autoplay muted loop playsinline>
+                <source src="static/videos/stereo4d-gallery/207Wvni3ujI-clip9-2d.mp4" type="video/mp4">
+              </video>
+              <video class="video-main" autoplay muted loop playsinline>
+                <source src="static/videos/stereo4d-gallery/207Wvni3ujI-clip9.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
 	        <br>
           <video poster="" autoplay playsinline muted loop height="288px">
             <source src="static/videos/stereo4d-gallery/207Wvni3ujI-clip9.mp4"

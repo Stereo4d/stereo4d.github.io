@@ -1,0 +1,19 @@
+.video-container {
+  position: relative;
+  display: inline-block;
+  width: 50%; /* Adjust the width as needed */
+  max-width: 100%;
+}
+
+.video-shadow {
+  position: absolute;
+  top: 10px; /* Offset for shadow effect */
+  left: 10px;
+  height: 50%;
+  z-index: 1; /* Ensures the shadow video appears above the main */
+  box-shadow : 5px 5px 4px #6c6c6c
+}
+
+.video-main {
+  position: relative;
+}
