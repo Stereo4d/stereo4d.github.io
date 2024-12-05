@@ -1,8 +1,5 @@
-.video-container {
+.videostack {
   position: relative;
-  display: inline-block;
-  width: 50%; /* Adjust the width as needed */
-  max-width: 100%;
 }
 
 .video-shadow {
