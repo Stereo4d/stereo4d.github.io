@@ -88,12 +88,11 @@
           <div class="is-size-5 publication-authors">
             <span class="author-block">
               <a href="https://jinlinyi.github.io/">Linyi Jin</a><sup>1</sup></span>,&nbsp&nbsp&nbsp&nbsp
-            </span>
             <span class="author-block">
               <a href="https://research.google/people/RichardTucker/">Richard Tucker</a><sup>1</sup>,&nbsp&nbsp&nbsp&nbsp
             </span>
             <span class="author-block">
-              <a href="https://zhengqili.github.io/">Zhengqi Li</a><sup>1</sup></span>,&nbsp&nbsp&nbsp&nbsp
+              <a href="https://zhengqili.github.io/">Zhengqi Li</a><sup>1</sup>,&nbsp&nbsp&nbsp&nbsp
             </span>
             <span class="author-block">
               <a href="https://cs.nyu.edu/~fouhey/">David Fouhey</a><sup>3</sup>,&nbsp&nbsp&nbsp&nbsp
@@ -102,7 +101,7 @@
               <a href="https://www.cs.cornell.edu/~snavely/">Noah Snavely</a><sup>1*</sup>,&nbsp&nbsp&nbsp&nbsp
             </span>
             <span class="author-block">
-              <a href="https://holynski.org/">Aleksander Hołyński</a><sup>1,4*</sup></span>
+              <a href="https://holynski.org/">Aleksander Hołyński</a><sup>1,4*</sup>
             </span>
           </div>
 
@@ -162,11 +161,7 @@
                   <span>Code</span>
                 </a>
               </span>
-
-
-
             </div>
-
           </div>
         </div>
       </div>
@@ -347,13 +342,12 @@
 <section class="hero is-light is-small">
   <div class="hero-body nopadding">
     <div class="container">
-      </div>
       <h3 class="subtitle has-text-centered">
         <font size="2">
         <span class="dnerf"> </span> 
-        Our method automatically turns single still images into seamless looping videos. </font>
+        Stereo4d contains a wide variety of moving objects. Only dynamic tracks are visualized. 
+        </font>
       </h3>
-
     </div>
   </div>
 </section>
@@ -377,7 +371,7 @@
     <!-- Pipeline. -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">How it works</h2>
+        <h2 class="title is-3">Data collection</h2>
         <div class="content has-text-justified">
           <p>
           We identify online, stereoscopic fisheye videos (often referred to as VR180 videos) as an untapped source of data for leaning motion. 
@@ -395,7 +389,7 @@
           At a high-level, our pipeline estimates camera poses, stereo disparity, and 2D tracks from rectified video clips.
           </p>
           <center>
-          <video id="pipeline" autoplay muted loop playsinline width="100%">
+          <video id="pipeline_stage1" autoplay muted loop playsinline width="100%">
             <source src="static/videos/pipeline/pipeline_stage1.mp4" type="video/mp4">
           </video>
           </center>
@@ -405,7 +399,7 @@
           We then fuse these quantities into a consistent 3D coordinate frame and get temporal consistent, high-quality reconstructions.
           </p>
           <center>
-          <video id="pipeline" autoplay muted loop playsinline width="100%">
+          <video id="pipeline_3d" autoplay muted loop playsinline width="100%">
             <source src="static/videos/pipeline/9F_CaOaT9Xg-clip0-dyna_3dtrack_concated.mp4" type="video/mp4">
           </video>
           </center>
@@ -413,9 +407,6 @@
 
 
         <div class="content has-text-justified">
-          <p>
-          To curate 3D data effectively, we need to do several things correct for optimal results. 
-          </p>
           <p>
             Denoising tracks: Depth estimates are often noisy from one frame to another. This results in jittery or noisy 3D tracks. We propose a 3D track optimization process that removes this noise. 
           </p>
@@ -463,105 +454,83 @@
     </div>
     <!--/ Pipeline. -->
 
-    <div class="columns is-centered has-text-centered" id="dynadust3r_result">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">DynaDUSt3R</h2>
-        <div class="content has-text-justified">
-          <center>
-          <!-- <video id="pipeline" autoplay muted loop playsinline width="90%">
-            <source src="static/videos/dynadust3r.mp4" type="video/mp4">
-          </video> -->
+    <section class="hero is-light is-small">
+      <div class="hero-body nopadding">
+        <div class="columns is-centered has-text-centered" id="dynadust3r_result">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Learning a prior on how things move</h2>
+            <p>
+              We propose DynaDUSt3R, an extension to <a href="https://dust3r.europe.naverlabs.com/">DUSt3R</a>, given a pair of frames from any real-world video, we can predict a pair of 3D point clouds and the corresponding 3D motion trajectories that connect them in time. 
+            </p>
+            
+            <div class="content has-text-justified">
+              <center>
+              <!-- <video id="pipeline" autoplay muted loop playsinline width="90%">
+                <source src="static/videos/dynadust3r.mp4" type="video/mp4">
+              </video> -->
 
-          <table style="margin-left: auto; margin-right: auto; width: 100%;">
-            <tr>
-                <th style="text-align: center;width: 30%; border:none">Input image pair</th>
-                <!-- <th style="text-align: center;width: 30%;">Fixed View<br>Varying Time</th>
-                <th style="text-align: center;width: 30%;">Varying View<br>Fixed Time</th> -->
-                <th style="text-align: center;width: 70%; border:none">Reconstruction</th>
-            </tr>
-            <tr>
-                <td style="text-align: center;width: 37%;">
-                  <img class="card-img" id="dynadust3r_input" src="static/videos/dynadust3r/cow/input.gif">
-                </td>
-                <td rowspan="1" colspan="2" style="width: 63%">
-                    <video id="dynadust3r_prediction" class="video" width=100% loop playsinline
-                        autoplay muted controls>
-                        <source src="static/videos/dynadust3r/cow/cow_fixed_horizon-fix.mp4" />
-                    </video>
-                </td>
-            </tr>
-          </table>
+              <table style="margin-left: auto; margin-right: auto; width: 100%;">
+                <tr>
+                    <th style="text-align: center;width: 30%; border:none">Input image pair</th>
+                    <!-- <th style="text-align: center;width: 30%;">Fixed View<br>Varying Time</th>
+                    <th style="text-align: center;width: 30%;">Varying View<br>Fixed Time</th> -->
+                    <th style="text-align: center;width: 70%; border:none">Reconstruction</th>
+                </tr>
+                <tr>
+                    <td style="text-align: center;width: 37%;">
+                      <img class="card-img" id="dynadust3r_input" src="static/videos/dynadust3r/cow/input.gif">
+                    </td>
+                    <td rowspan="1" colspan="2" style="width: 63%">
+                        <video id="dynadust3r_prediction" class="video" width=100% loop playsinline
+                            autoplay muted controls>
+                            <source src="static/videos/dynadust3r/cow/cow_fixed_horizon-fix.mp4" />
+                        </video>
+                    </td>
+                </tr>
+              </table>
 
-          <div class="pill-row scene-pills" id="cameratime-pills" role="group" aria-relevant="additions text">
-            <div class="pill scene-pill" data-value="cow">
-                <img class="card-img" src="static/videos/dynadust3r/cow/rgb_00000.png">
-            </div>
-            <div class="pill scene-pill" data-value="park">
-                <img class="card-img" src="static/videos/dynadust3r/park/rgb_00000.png">
-            </div>
-            <div class="pill scene-pill" data-value="rolling">
-                <img class="card-img" src="static/videos/dynadust3r/rolling/rgb_00000.png">
-            </div>
-          </div>
-          </center>
-          <div class="columns is-centered">
-            <div class="column is-centered">
-                <div class="subtitle has-text-centered">
-                  <font size="3">
-                  Given two images, DynaDUSt3R predicts a 3D point cloud for each, and a 3D trajectory map between the point clouds.
-                  </font>
+              <div class="pill-row scene-pills" id="cameratime-pills" role="group" aria-relevant="additions text">
+                <div class="pill scene-pill" data-value="cow">
+                    <img class="card-img" src="static/videos/dynadust3r/cow/rgb_00000.png">
                 </div>
+                <div class="pill scene-pill" data-value="park">
+                    <img class="card-img" src="static/videos/dynadust3r/park/rgb_00000.png">
+                </div>
+                <div class="pill scene-pill" data-value="rolling">
+                    <img class="card-img" src="static/videos/dynadust3r/rolling/rgb_00000.png">
+                </div>
+              </div>
+              </center>
+              <!-- <div class="columns is-centered">
+                <div class="column is-centered">
+                    <div class="subtitle has-text-centered">
+                      <font size="3">
+                      Given two images, DynaDUSt3R predicts a 3D point cloud for each, and a 3D trajectory map between the point clouds.
+                      </font>
+                    </div>
+                </div>
+              </div> -->
             </div>
           </div>
         </div>
       </div>
-    </div>
-
-  <script>
-      compareDiv = document.querySelector("#dynadust3r_result")
-      activeScene_cameratime = "cow"
-
-      const methodPills_cameratime = compareDiv.querySelectorAll('.method-pill');
-      const scenePills_cameratime = compareDiv.querySelectorAll(".scene-pill")
-      const showVideo_cameratime = compareDiv.querySelector('#dynadust3r_prediction')
-      const showGif_cameratime = compareDiv.querySelector('#dynadust3r_input')
-
-      for (scenePill of scenePills_cameratime) {
-          scenePill.addEventListener('click', function () {
-              activeScene_cameratime = this.getAttribute('data-value');
-              updateDisplayCameraTime();
-          });
-      }
-
-      function updateDisplayCameraTime() {
-          for (scenePill of scenePills_cameratime) {
-              if (scenePill.getAttribute('data-value') == activeScene_cameratime) {
-                  scenePill.classList.add('active');
-              } else {
-                  scenePill.classList.remove('active')
-              }
-          }
-          showVideo_cameratime.src = `static/videos/dynadust3r/${activeScene_cameratime}/${activeScene_cameratime}_fixed_horizon-fix.mp4`
-          showVideo_cameratime.playbackRate = 2.0;
-          showGif_cameratime.src = `static/videos/dynadust3r/${activeScene_cameratime}/input.gif`
-      }
-      // Update initial display
-      updateDisplayCameraTime()
-
-  </script>
+    </section>
+  </div>
+</section> 
 
 <br>
+
+<section class="section" id="Acknowledgements">
   <div class="columns is-centered has-text-centered">
-    <div class="column is-four-fifths"><br><br>
-      <h2 class="title is-3">Acknowledgements</h3>
-      <div class="content has-text-justified">
+    <div class="column is-four-fifths is-centered"><br><br>
+      <h2 class="title is-3">Acknowledgements</h2>
+      <div class="content has-text-centered">
+        <font size="3">
           Thanks to Kyle Genova, Andrew Liu, Jon Barron, Philip Henzler, Stan Szymanowicz, Ruiqi Gao, Qianqian Wang for helpful proofreading, comments and discussions.
+        </font>
       </div>
     </div>
   </div>
-
-  </div>
-
 </section>
 
  <br>
@@ -590,6 +559,7 @@
     </div>
 </footer>
 <script src="./static/js/slider.js"></script>
+<script src="./static/js/dust3r_selection.js"></script>
 
 </body>
 </html>
