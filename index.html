@@ -380,7 +380,7 @@
 
         <div class="content has-text-justified">
           <p>
-            Denoising tracks: Depth estimates are often noisy from one frame to another. This results in jittery or noisy 3D tracks. We propose a 3D track optimization process that removes this noise. 
+            This gives us pretty reasonable 4D scenes, but there's still work left to be done. The precision of stereo depth predictions may be limited by the content of the scene (e.g., distant objects seen with small parallax may have a large variance of possible depth values&mdash;and can therefore vary signifcantly from one frame to another). This results in jittery or noisy 3D tracks. To compensate for this, we additionally perform an optimization process over the 3D trajectories that removes this noise. 
           </p>
           </div>
           <div class="columns is-centered is-vcentered">
@@ -435,11 +435,11 @@
         <div class="columns is-centered has-text-centered" id="dynadust3r_result">
           <div class="column is-four-fifths">
             <h2 class="title is-3">Using this data to learn <em>how things move</em></h2>
-            <p>
-              We propose DynaDUSt3R, an extension to <a href="https://dust3r.europe.naverlabs.com/">DUSt3R</a>, given a pair of frames from any real-world video, we can predict a pair of 3D point clouds and the corresponding 3D motion trajectories that connect them in time. 
-            </p>
-            
             <div class="content has-text-justified">
+            <p >
+      To validate that our dataset is useful for learning about the structure and motion of real-world scenes, we use it to train a variant of <a href="https://dust3r.europe.naverlabs.com/">DUSt3R</a>. DUSt3R usually takes as input a pair of images, and predicts a 3D point (in a shared coordinate frame) for each pixel in both images&mdash;but it fails when the scene is dynamic, e.g., when there is scene motion between the two images. This comes largely as a consequence of the fact that DUSt3R is trained on static data (since there aren't very many sources of ground-truth dynamic 3D scenes). We extend DUSt3R by adding a notion of time&mdash;into a model that we call DynaDUSt3R, and train it on our Stereo4D dataset. Given a pair of frames from any real-world video, DynaDUSt3R predicts per-pixel 3D points for each frame, as well as the 3D motion trajectories that connect them in time. 
+    </p>
+            
               <center>
               <!-- <video id="pipeline" autoplay muted loop playsinline width="90%">
                 <source src="static/videos/dynadust3r.mp4" type="video/mp4">
