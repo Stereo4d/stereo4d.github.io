@@ -1,484 +1,753 @@
-
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta name="description"
-        content="Stereo4D">
-  <meta name="keywords" content="Stereo4D">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Stereo4D</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="Stereo4D" />
+    <meta name="keywords" content="Stereo4D" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Stereo4D</title>
 
-  <link rel="icon" type="image/x-icon" href="static/stereo_icon.ico">
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script> -->
-  <script>
-    window.dataLayer = window.dataLayer || [];
+    <link rel="icon" type="image/x-icon" href="static/stereo_icon.ico" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script> -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
 
-    function gtag() {
-      dataLayer.push(arguments);
-    }
+      function gtag() {
+        dataLayer.push(arguments);
+      }
 
-    gtag('js', new Date());
+      gtag("js", new Date());
 
-    gtag('config', 'G-PYVRSFMDRL');
-  </script>
+      gtag("config", "G-PYVRSFMDRL");
+    </script>
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-        rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+      rel="stylesheet"
+    />
 
-  <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="./static/css/slider.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css">
+    <link rel="stylesheet" href="./static/css/bulma.min.css" />
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css" />
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css" />
+    <link rel="stylesheet" href="./static/css/slider.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"
+    />
+    <link rel="stylesheet" href="./static/css/index.css" />
 
-  <link rel="stylesheet" href="./static/css/app.css">
-  <link rel="stylesheet" href="./static/css/stack_video.css">
-  
+    <link rel="stylesheet" href="./static/css/app.css" />
+    <link rel="stylesheet" href="./static/css/stack_video.css" />
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="./static/js/bulma-carousel.min.js"></script>
-  <script src="./static/js/index.js"></script>
-  <!-- <script src="./static/js/stack_video.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/index.js"></script>
+    <!-- <script src="./static/js/stack_video.js"></script> -->
 
+    <style>
+      #interactive {
+        position: relative;
+        display: inline-block;
+        width: 768px;
+        aspect-ratio: 16/9;
+        max-width: 100%;
+      }
+      #interactive canvas,
+      #interactive svg,
+      #interactive #glfailed {
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        touch-action: none;
+      }
+      #interactive svg {
+        pointer-events: none;
+      }
+      #interactive #glfailed {
+        color: #f88;
+        background: black;
+        display: none;
+      }
+      .load img {
+        width: 128px;
+        height: 72px;
+        margin-right: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column has-text-centered">
+              <h1
+                class="title is-1 publication-title"
+                style="margin-bottom: 0rem"
+              >
+                Stereo4D
+              </h1>
+              <h3 class="title is-3 publication-title">
+                Learning How Things Move in 3D from Internet Stereo Videos
+              </h3>
+              <div class="is-size-6 publication-authors">
+                <span class="author-block">
+                  <a href="https://jinlinyi.github.io/">Linyi Jin</a
+                  ><sup>1,2</sup></span
+                >,&nbsp&nbsp&nbsp&nbsp
+                <span class="author-block">
+                  <a
+                    href="https://scholar.google.com/citations?user=IkpNZAoAAAAJ&hl=en"
+                    >Richard Tucker</a
+                  ><sup>1</sup>,&nbsp&nbsp&nbsp&nbsp
+                </span>
+                <span class="author-block">
+                  <a href="https://zhengqili.github.io/">Zhengqi Li</a
+                  ><sup>1</sup>,&nbsp&nbsp&nbsp&nbsp
+                </span>
+                <span class="author-block">
+                  <a href="https://cs.nyu.edu/~fouhey/">David Fouhey</a
+                  ><sup>3</sup>,&nbsp&nbsp&nbsp&nbsp
+                </span>
+                <span class="author-block">
+                  <a href="https://www.cs.cornell.edu/~snavely/">Noah Snavely</a
+                  ><sup>1*</sup>,&nbsp&nbsp&nbsp&nbsp
+                </span>
+                <span class="author-block">
+                  <a href="https://holynski.org/">Aleksander Hołyński</a
+                  ><sup>1,4*</sup>
+                </span>
+              </div>
 
+              <div class="is-size-6 publication-authors">
+                <span class="author-block"><sup>1</sup>Google DeepMind</span>
+                &nbsp&nbsp&nbsp&nbsp
+                <span class="author-block"
+                  ><sup>2</sup>University of Michigan</span
+                >
+                &nbsp&nbsp&nbsp&nbsp
+                <span class="author-block"
+                  ><sup>3</sup>New York University</span
+                >
+                &nbsp&nbsp&nbsp&nbsp
+                <span class="author-block"><sup>4</sup>UC Berkeley</span>
+                &nbsp&nbsp&nbsp&nbsp (*: equal contribution)
+              </div>
 
-<style>
-#interactive {
-  position: relative;
-  display: inline-block;
-  width: 768px;
-  aspect-ratio: 16/9;
-  max-width: 100%;
-}
-#interactive canvas, #interactive svg, #interactive #glfailed {
-  display: block;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  touch-action: none;
-}
-#interactive svg {
-  pointer-events: none;
-}
-#interactive #glfailed {
-  color: #f88;
-  background: black;
-  display: none;
-}
-.load img {
-  width: 128px;
-  height: 72px;
-  margin-right: 4px;
-}
-</style>
-</head>
-<body>
+              <!-- <h1 style="font-size:24px;font-weight:bold">CVPR 2024 Best Paper Award</h1> -->
 
-<section class="hero">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title" style="margin-bottom:0rem">Stereo4D</h1>
-          <h3 class="title is-3 publication-title">Learning How Things Move in 3D from Internet Stereo Videos</h3>
-          <div class="is-size-6 publication-authors">
-            <span class="author-block">
-              <a href="https://jinlinyi.github.io/">Linyi Jin</a><sup>1,2</sup></span>,&nbsp&nbsp&nbsp&nbsp
-            <span class="author-block">
-              <a href="https://research.google/people/RichardTucker/">Richard Tucker</a><sup>1</sup>,&nbsp&nbsp&nbsp&nbsp
-            </span>
-            <span class="author-block">
-              <a href="https://zhengqili.github.io/">Zhengqi Li</a><sup>1</sup>,&nbsp&nbsp&nbsp&nbsp
-            </span>
-            <span class="author-block">
-              <a href="https://cs.nyu.edu/~fouhey/">David Fouhey</a><sup>3</sup>,&nbsp&nbsp&nbsp&nbsp
-            </span>
-            <span class="author-block">
-              <a href="https://www.cs.cornell.edu/~snavely/">Noah Snavely</a><sup>1*</sup>,&nbsp&nbsp&nbsp&nbsp
-            </span>
-            <span class="author-block">
-              <a href="https://holynski.org/">Aleksander Hołyński</a><sup>1,4*</sup>
-            </span>
-          </div>
-
-          <div class="is-size-6 publication-authors">
-            <span class="author-block"><sup>1</sup>Google DeepMind</span>
-            &nbsp&nbsp&nbsp&nbsp
-            <span class="author-block"><sup>2</sup>University of Michigan</span>
-            &nbsp&nbsp&nbsp&nbsp
-            <span class="author-block"><sup>3</sup>New York University</span>
-            &nbsp&nbsp&nbsp&nbsp
-            <span class="author-block"><sup>4</sup>UC Berkeley</span>
-            &nbsp&nbsp&nbsp&nbsp
-            (*: equal contribution)
-          </div>
-
-          <!-- <h1 style="font-size:24px;font-weight:bold">CVPR 2024 Best Paper Award</h1> -->
-    
-          <div class="column has-text-centered">
-            <div class="publication-links">
-              <span class="link-block">
-                <a href=""
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
-                </a>
-              </span>
-              <!-- Video Link. -->
-              <!-- Supp Link. -->
-              <span class="link-block">
-                <a 
-                   class="external-link button is-normal is-rounded is-dark" disabled>
-                  <span class="icon">
-                      <i class="fab fa-github"></i> 
-                  </span>
-                  <span>Check back later for updates on data & code</span>
-                </a>
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <center>
-      <video id="teaser" autoplay muted loop playsinline width="90%">
-        <source src="static/videos/teaser.mp4" type="video/mp4">
-      </video>
-      </center>
-      <div class="columns is-centered">
-        <div class="column is-centered rounded">
-<div class="notification is-link is-light" style="text-align: center; padding-bottom: 5px; padding-top: 5px; background-color: #d0d5ec;"> <h6 style="text-align: center; color:rgb(0, 0, 0)"><strong>TL;DR</strong>: Create a dataset of real 4D scenes from hundreds of thousands of online stereoscopic videos.</h6></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="hero is-light is-small">
-  <div class="hero-body nopadding has-text-centered">
-        <h2 class="title is-3 has-text-centered" style="margin-bottom: 5px">Dataset gallery</h2>
-        <p class="is-6 has-text-centered">Examples from our processed dataset, showing a wide variety of scenes and moving objects. 
-	Color trails are only shown for moving points, but all points have been reconstructed in 3D.</p><br>
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-
-        <div class="item item-fullbody">
-          <!-- ko2x2dcU9PI-clip13 -->
-          <div class="item videostack">
-            <video class="video-shadow" autoplay muted loop playsinline>
-              <source src="static/videos/stereo4d-gallery/ko2x2dcU9PI-clip13-2d.mp4" type="video/mp4">
-            </video>
-            <video class="video-main" autoplay muted loop playsinline>
-              <source src="static/videos/stereo4d-gallery/ko2x2dcU9PI-clip13.mp4" type="video/mp4">
-            </video>
-          </div>
-          <br>
-          <!-- 3VDtiWBLdMY-clip11 -->
-          <div class="item videostack">
-            <video class="video-shadow" autoplay muted loop playsinline>
-              <source src="static/videos/stereo4d-gallery/3VDtiWBLdMY-clip11-2d.mp4" type="video/mp4">
-            </video>
-            <video class="video-main" autoplay muted loop playsinline>
-              <source src="static/videos/stereo4d-gallery/3VDtiWBLdMY-clip11.mp4" type="video/mp4">
-            </video>
-          </div>
-        </div>
-        
-        
-        <div class="item item-fullbody">
-          <!-- QaDjmWNVS18-clip55 -->
-          <div class="item videostack">
-            <video class="video-shadow" autoplay muted loop playsinline>
-              <source src="static/videos/stereo4d-gallery/QaDjmWNVS18-clip55-2d.mp4" type="video/mp4">
-            </video>
-            <video class="video-main" autoplay muted loop playsinline>
-              <source src="static/videos/stereo4d-gallery/QaDjmWNVS18-clip55.mp4" type="video/mp4">
-            </video>
-          </div>
-          <br>
-          <!-- Xe3hmWN3Qp8-clip75 -->
-          <div class="item videostack">
-            <video class="video-shadow" autoplay muted loop playsinline>
-              <source src="static/videos/stereo4d-gallery/Xe3hmWN3Qp8-clip75-2d.mp4" type="video/mp4">
-            </video>
-            <video class="video-main" autoplay muted loop playsinline>
-              <source src="static/videos/stereo4d-gallery/Xe3hmWN3Qp8-clip75.mp4" type="video/mp4">
-            </video>
-          </div>
-        </div>
-        
-        
-        <div class="item item-fullbody">
-          <!-- CMwZrkhQ0ck-clip28 -->
-          <div class="item videostack">
-            <video class="video-shadow" autoplay muted loop playsinline>
-              <source src="static/videos/stereo4d-gallery/CMwZrkhQ0ck-clip28-2d.mp4" type="video/mp4">
-            </video>
-            <video class="video-main" autoplay muted loop playsinline>
-              <source src="static/videos/stereo4d-gallery/CMwZrkhQ0ck-clip28.mp4" type="video/mp4">
-            </video>
-          </div>
-          <br>
-          <!-- 7YAIbIXy67Y-clip30 -->
-          <div class="item videostack">
-            <video class="video-shadow" autoplay muted loop playsinline>
-              <source src="static/videos/stereo4d-gallery/7YAIbIXy67Y-clip30-2d.mp4" type="video/mp4">
-            </video>
-            <video class="video-main" autoplay muted loop playsinline>
-              <source src="static/videos/stereo4d-gallery/7YAIbIXy67Y-clip30.mp4" type="video/mp4">
-            </video>
-          </div>
-        </div>
-        
-        
-        <div class="item item-fullbody">
-          <!-- 207Wvni3ujI-clip9 -->
-          <div class="item videostack">
-            <video class="video-shadow" autoplay muted loop playsinline>
-              <source src="static/videos/stereo4d-gallery/207Wvni3ujI-clip9-2d.mp4" type="video/mp4">
-            </video>
-            <video class="video-main" autoplay muted loop playsinline>
-              <source src="static/videos/stereo4d-gallery/207Wvni3ujI-clip9.mp4" type="video/mp4">
-            </video>
-          </div>
-          <br>
-          <!-- C7ZKYUMpPz4-clip30 -->
-          <div class="item videostack">
-            <video class="video-shadow" autoplay muted loop playsinline>
-              <source src="static/videos/stereo4d-gallery/C7ZKYUMpPz4-clip30-2d.mp4" type="video/mp4">
-            </video>
-            <video class="video-main" autoplay muted loop playsinline>
-              <source src="static/videos/stereo4d-gallery/C7ZKYUMpPz4-clip30.mp4" type="video/mp4">
-            </video>
-          </div>
-        </div>
-        
-        
-        <div class="item item-fullbody">
-          <!-- 7thep44_zto-clip13 -->
-          <div class="item videostack">
-            <video class="video-shadow" autoplay muted loop playsinline>
-              <source src="static/videos/stereo4d-gallery/7thep44_zto-clip13-2d.mp4" type="video/mp4">
-            </video>
-            <video class="video-main" autoplay muted loop playsinline>
-              <source src="static/videos/stereo4d-gallery/7thep44_zto-clip13.mp4" type="video/mp4">
-            </video>
-          </div>
-          <br>
-          <!-- n6fNculviyQ-clip19 -->
-          <div class="item videostack">
-            <video class="video-shadow" autoplay muted loop playsinline>
-              <source src="static/videos/stereo4d-gallery/n6fNculviyQ-clip19-2d.mp4" type="video/mp4">
-            </video>
-            <video class="video-main" autoplay muted loop playsinline>
-              <source src="static/videos/stereo4d-gallery/n6fNculviyQ-clip19.mp4" type="video/mp4">
-            </video>
-          </div>
-        </div>
-        
-        
-        <div class="item item-fullbody">
-          <!-- y1e-TwNNiiQ-clip2 -->
-          <div class="item videostack">
-            <video class="video-shadow" autoplay muted loop playsinline>
-              <source src="static/videos/stereo4d-gallery/y1e-TwNNiiQ-clip2-2d.mp4" type="video/mp4">
-            </video>
-            <video class="video-main" autoplay muted loop playsinline>
-              <source src="static/videos/stereo4d-gallery/y1e-TwNNiiQ-clip2.mp4" type="video/mp4">
-            </video>
-          </div>
-          <br>
-          <!-- Lqhj6rCE6E0-clip5 -->
-          <div class="item videostack">
-            <video class="video-shadow" autoplay muted loop playsinline>
-              <source src="static/videos/stereo4d-gallery/Lqhj6rCE6E0-clip5-2d.mp4" type="video/mp4">
-            </video>
-            <video class="video-main" autoplay muted loop playsinline>
-              <source src="static/videos/stereo4d-gallery/Lqhj6rCE6E0-clip5.mp4" type="video/mp4">
-            </video>
-          </div>
-        </div>
-        
-
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <!-- Abstract. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-            Learning to understand dynamic 3D scenes from imagery is crucial for applications ranging from robotics to scene reconstruction. Yet, unlike other problems where large-scale supervised training has enabled rapid progress, directly supervising methods for recovering 3D motion remains challenging due to the fundamental difficulty of obtaining ground truth annotations. 
-            We present a system for mining high-quality 4D reconstructions from internet stereoscopic, wide-angle videos. Our system fuses and filters the outputs of camera pose estimation, stereo depth estimation, and temporal tracking methods into high-quality dynamic 3D reconstructions. We use this method to generate large-scale data in the form of world-consistent, pseudo-metric 3D point clouds with long-term motion trajectories. We demonstrate the utility of this data by training a variant of \duster to predict structure and 3D motion from real-world image pairs, showing that training on our reconstructed data enables generalization to diverse real-world scenes.
-          </p>
-        </div>
-      </div>
-    </div>
-</div>
-    <!--/ Abstract. -->
-</section>
-<section>
-  <div class="container is-max-desktop">
-    <!-- Pipeline. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-	<div class="notification is-success is-light">
-        <h2 class="title is-3">How is it made?</h2>
-        <div class="content has-text-justified">
-          <p>
-          Stereoscopic fisheye videos from the internet are an untapped source of high-quality 4D data: (1) there are hundreds of thousands of them, and (2) since they're designed to capture immersive VR experiences, they have wide field-of-view stereo imagery with a standardized stereo baseline, precisely the kind of information that's useful in reconstructing pseudo-metric 4D scenes. These videos contain a pretty even spread of what we might see in everyday life---some examples are shown here:
-          </p>
-          <center style="display: flex;align-items: center;">
-            <div>
-              <img id="pic1" src="static/videos/pipeline/vrcameras.png">
-            </div>
-            <video id="pipeline" autoplay muted loop playsinline width="82%">
-              <source src="static/videos/pipeline/vr180s-v2.mp4" type="video/mp4">
-            </video>
-          </center>
-        </div>
-        <div class="content has-text-justified">
-          <p>
-          We present a pipeline that carefully combines state-of-the-art methods for stereo depth estimation and video tracking along with custom structure-from-motion methods that are optimized for dynamic scenes.
-          At a high-level, our pipeline estimates camera poses, stereo disparity, and 2D tracks from rectified video clips.
-          </p>
-          <center>
-          <video id="pipeline_stage1" autoplay muted loop playsinline width="100%">
-            <source src="static/videos/pipeline/pipeline_stage1.mp4" type="video/mp4">
-          </video>
-          </center>
-        </div>
-        <div class="content has-text-justified">
-          <p>
-          We then fuse these quantities into a consistent 3D coordinate frame and get temporal consistent, high-quality reconstructions.
-          </p>
-          <center>
-          <video id="pipeline_3d" autoplay muted loop playsinline width="100%">
-            <source src="static/videos/pipeline/9F_CaOaT9Xg-clip0-dyna_3dtrack_concated.mp4" type="video/mp4">
-          </video>
-          </center>
-        </div>
-
-
-        <div class="content has-text-justified">
-          <p>
-            Denoising tracks: Depth estimates are often noisy from one frame to another. This results in jittery or noisy 3D tracks. We propose a 3D track optimization process that removes this noise. 
-          </p>
-          </div>
-          <div class="columns is-centered is-vcentered">
-            <div class="column is-two-fifths">
-              <!-- Left Video -->
-              <video class="syncstart" muted loop playsinline preload="auto">
-                <source src="static/videos/track_optimization/projected.mp4" type="video/mp4">
-              </video>
-            </div>
-            <div class="column is-three-fifths">
-              <!-- Slider Comparison -->
-              <div class="image-comparison">
-                <div class="images-container">
-                  <video class="before-image syncstart" muted loop playsinline preload="auto">
-                    <source src="static/videos/track_optimization/after3.mp4" type="video/mp4">
-                  </video>
-                  <video class="after-image syncstart" muted loop playsinline preload="auto">
-                    <source src="static/videos/track_optimization/before3.mp4" type="video/mp4">
-                  </video>
-                  <div class="slider-line"></div>
-                  <div class="slider-icon">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      class="w-6 h-6"
+              <div class="column has-text-centered">
+                <div class="publication-links">
+                  <span class="link-block">
+                    <a
+                      href=""
+                      class="external-link button is-normal is-rounded is-dark"
                     >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
-                      />
-                    </svg>
-                  </div>
-                  <input type="range" class="slider" min="1" max="99" />
+                      <span class="icon">
+                        <i class="ai ai-arxiv"></i>
+                      </span>
+                      <span>arXiv</span>
+                    </a>
+                  </span>
+                  <!-- Video Link. -->
+                  <!-- Supp Link. -->
+                  <span class="link-block">
+                    <a
+                      class="external-link button is-normal is-rounded is-dark"
+                      disabled
+                    >
+                      <span class="icon">
+                        <i class="fab fa-github"></i>
+                      </span>
+                      <span>Check back later for updates on data & code</span>
+                    </a>
+                  </span>
                 </div>
               </div>
             </div>
+          </div>
         </div>
-</div>
       </div>
-    </div>
-    <!--/ Pipeline. -->
-</div>
-</section>
-<br>
-<section class="">
-  <div class="container is-max-desktop">
-      <div class="hero-body nopadding">
-        <div class="columns is-centered has-text-centered" id="dynadust3r_result">
+    </section>
+
+    <section class="hero teaser">
+      <div class="container is-max-desktop">
+        <div class="hero-body">
+          <center>
+            <video id="teaser" autoplay muted loop playsinline width="90%">
+              <source src="static/videos/teaser.mp4" type="video/mp4" />
+            </video>
+          </center>
+          <div class="columns is-centered">
+            <div class="column is-centered rounded">
+              <div
+                class="notification is-link is-light"
+                style="
+                  text-align: center;
+                  padding-bottom: 5px;
+                  padding-top: 5px;
+                  background-color: #d0d5ec;
+                "
+              >
+                <h6 style="text-align: center; color: rgb(0, 0, 0)">
+                  <strong>TL;DR</strong>: Create a dataset of real 4D scenes
+                  from hundreds of thousands of online stereoscopic videos.
+                </h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hero is-light is-small">
+      <div class="hero-body nopadding has-text-centered">
+        <h2 class="title is-3 has-text-centered" style="margin-bottom: 5px">
+          Dataset gallery
+        </h2>
+        <p class="is-6 has-text-centered">
+          Examples from our processed dataset, showing a wide variety of scenes
+          and moving objects. Color trails are only shown for moving points, but
+          all points have been reconstructed in 3D.
+        </p>
+        <br />
+        <div class="container">
+          <div id="results-carousel" class="carousel results-carousel">
+            <div class="item item-fullbody">
+              <!-- ko2x2dcU9PI-clip13 -->
+              <div class="item videostack">
+                <video class="video-shadow" autoplay muted loop playsinline>
+                  <source
+                    src="static/videos/stereo4d-gallery/ko2x2dcU9PI-clip13-2d.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+                <video class="video-main" autoplay muted loop playsinline>
+                  <source
+                    src="static/videos/stereo4d-gallery/ko2x2dcU9PI-clip13.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+              </div>
+              <br />
+              <!-- 3VDtiWBLdMY-clip11 -->
+              <div class="item videostack">
+                <video class="video-shadow" autoplay muted loop playsinline>
+                  <source
+                    src="static/videos/stereo4d-gallery/3VDtiWBLdMY-clip11-2d.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+                <video class="video-main" autoplay muted loop playsinline>
+                  <source
+                    src="static/videos/stereo4d-gallery/3VDtiWBLdMY-clip11.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+              </div>
+            </div>
+
+            <div class="item item-fullbody">
+              <!-- QaDjmWNVS18-clip55 -->
+              <div class="item videostack">
+                <video class="video-shadow" autoplay muted loop playsinline>
+                  <source
+                    src="static/videos/stereo4d-gallery/QaDjmWNVS18-clip55-2d.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+                <video class="video-main" autoplay muted loop playsinline>
+                  <source
+                    src="static/videos/stereo4d-gallery/QaDjmWNVS18-clip55.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+              </div>
+              <br />
+              <!-- Xe3hmWN3Qp8-clip75 -->
+              <div class="item videostack">
+                <video class="video-shadow" autoplay muted loop playsinline>
+                  <source
+                    src="static/videos/stereo4d-gallery/Xe3hmWN3Qp8-clip75-2d.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+                <video class="video-main" autoplay muted loop playsinline>
+                  <source
+                    src="static/videos/stereo4d-gallery/Xe3hmWN3Qp8-clip75.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+              </div>
+            </div>
+
+            <div class="item item-fullbody">
+              <!-- CMwZrkhQ0ck-clip28 -->
+              <div class="item videostack">
+                <video class="video-shadow" autoplay muted loop playsinline>
+                  <source
+                    src="static/videos/stereo4d-gallery/CMwZrkhQ0ck-clip28-2d.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+                <video class="video-main" autoplay muted loop playsinline>
+                  <source
+                    src="static/videos/stereo4d-gallery/CMwZrkhQ0ck-clip28.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+              </div>
+              <br />
+              <!-- 7YAIbIXy67Y-clip30 -->
+              <div class="item videostack">
+                <video class="video-shadow" autoplay muted loop playsinline>
+                  <source
+                    src="static/videos/stereo4d-gallery/7YAIbIXy67Y-clip30-2d.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+                <video class="video-main" autoplay muted loop playsinline>
+                  <source
+                    src="static/videos/stereo4d-gallery/7YAIbIXy67Y-clip30.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+              </div>
+            </div>
+
+            <div class="item item-fullbody">
+              <!-- 207Wvni3ujI-clip9 -->
+              <div class="item videostack">
+                <video class="video-shadow" autoplay muted loop playsinline>
+                  <source
+                    src="static/videos/stereo4d-gallery/207Wvni3ujI-clip9-2d.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+                <video class="video-main" autoplay muted loop playsinline>
+                  <source
+                    src="static/videos/stereo4d-gallery/207Wvni3ujI-clip9.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+              </div>
+              <br />
+              <!-- C7ZKYUMpPz4-clip30 -->
+              <div class="item videostack">
+                <video class="video-shadow" autoplay muted loop playsinline>
+                  <source
+                    src="static/videos/stereo4d-gallery/C7ZKYUMpPz4-clip30-2d.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+                <video class="video-main" autoplay muted loop playsinline>
+                  <source
+                    src="static/videos/stereo4d-gallery/C7ZKYUMpPz4-clip30.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+              </div>
+            </div>
+
+            <div class="item item-fullbody">
+              <!-- 7thep44_zto-clip13 -->
+              <div class="item videostack">
+                <video class="video-shadow" autoplay muted loop playsinline>
+                  <source
+                    src="static/videos/stereo4d-gallery/7thep44_zto-clip13-2d.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+                <video class="video-main" autoplay muted loop playsinline>
+                  <source
+                    src="static/videos/stereo4d-gallery/7thep44_zto-clip13.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+              </div>
+              <br />
+              <!-- n6fNculviyQ-clip19 -->
+              <div class="item videostack">
+                <video class="video-shadow" autoplay muted loop playsinline>
+                  <source
+                    src="static/videos/stereo4d-gallery/n6fNculviyQ-clip19-2d.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+                <video class="video-main" autoplay muted loop playsinline>
+                  <source
+                    src="static/videos/stereo4d-gallery/n6fNculviyQ-clip19.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+              </div>
+            </div>
+
+            <div class="item item-fullbody">
+              <!-- y1e-TwNNiiQ-clip2 -->
+              <div class="item videostack">
+                <video class="video-shadow" autoplay muted loop playsinline>
+                  <source
+                    src="static/videos/stereo4d-gallery/y1e-TwNNiiQ-clip2-2d.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+                <video class="video-main" autoplay muted loop playsinline>
+                  <source
+                    src="static/videos/stereo4d-gallery/y1e-TwNNiiQ-clip2.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+              </div>
+              <br />
+              <!-- Lqhj6rCE6E0-clip5 -->
+              <div class="item videostack">
+                <video class="video-shadow" autoplay muted loop playsinline>
+                  <source
+                    src="static/videos/stereo4d-gallery/Lqhj6rCE6E0-clip5-2d.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+                <video class="video-main" autoplay muted loop playsinline>
+                  <source
+                    src="static/videos/stereo4d-gallery/Lqhj6rCE6E0-clip5.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container is-max-desktop">
+        <!-- Abstract. -->
+        <div class="columns is-centered has-text-centered">
           <div class="column is-four-fifths">
-            <h2 class="title is-3">Using this data to learn how things move</h2>
-            <p>
-              We propose DynaDUSt3R, an extension to <a href="https://dust3r.europe.naverlabs.com/">DUSt3R</a>, given a pair of frames from any real-world video, we can predict a pair of 3D point clouds and the corresponding 3D motion trajectories that connect them in time. 
-            </p>
-            
+            <h2 class="title is-3">Abstract</h2>
             <div class="content has-text-justified">
-              <center>
-              <!-- <video id="pipeline" autoplay muted loop playsinline width="90%">
+              <p>
+                Learning to understand dynamic 3D scenes from imagery is crucial
+                for applications ranging from robotics to scene reconstruction.
+                Yet, unlike other problems where large-scale supervised training
+                has enabled rapid progress, directly supervising methods for
+                recovering 3D motion remains challenging due to the fundamental
+                difficulty of obtaining ground truth annotations. We present a
+                system for mining high-quality 4D reconstructions from internet
+                stereoscopic, wide-angle videos. Our system fuses and filters
+                the outputs of camera pose estimation, stereo depth estimation,
+                and temporal tracking methods into high-quality dynamic 3D
+                reconstructions. We use this method to generate large-scale data
+                in the form of world-consistent, pseudo-metric 3D point clouds
+                with long-term motion trajectories. We demonstrate the utility
+                of this data by training a variant of \duster to predict
+                structure and 3D motion from real-world image pairs, showing
+                that training on our reconstructed data enables generalization
+                to diverse real-world scenes.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+    </section>
+    <section>
+      <div class="container is-max-desktop">
+        <!-- Pipeline. -->
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <div class="notification is-success is-light">
+              <h2 class="title is-3">How is it made?</h2>
+              <div class="content has-text-justified">
+                <p>
+                  Stereoscopic fisheye videos from the internet are an untapped
+                  source of high-quality 4D data: (1) there are hundreds of
+                  thousands of them, and (2) since they're designed to capture
+                  immersive VR experiences, they have wide field-of-view stereo
+                  imagery with a standardized stereo baseline, precisely the
+                  kind of information that's useful in reconstructing
+                  pseudo-metric 4D scenes. These videos contain a pretty even
+                  spread of what we might see in everyday life---some examples
+                  are shown here:
+                </p>
+                <center style="display: flex; align-items: center">
+                  <div>
+                    <img id="pic1" src="static/videos/pipeline/vrcameras.png" />
+                  </div>
+                  <video
+                    id="pipeline"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    width="82%"
+                  >
+                    <source
+                      src="static/videos/pipeline/vr180s-v2.mp4"
+                      type="video/mp4"
+                    />
+                  </video>
+                </center>
+              </div>
+              <div class="content has-text-justified">
+                <p>
+                  We present a pipeline that carefully combines state-of-the-art
+                  methods for stereo depth estimation and video tracking along
+                  with custom structure-from-motion methods that are optimized
+                  for dynamic scenes. At a high-level, our pipeline estimates
+                  camera poses, stereo disparity, and 2D tracks from rectified
+                  video clips.
+                </p>
+                <center style="display: flex; align-items: center">
+                  <video
+                    id="pipeline_stage1"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    width="35%"
+                  >
+                    <source
+                      src="static/videos/pipeline/input_equirect.mp4"
+                      type="video/mp4"
+                    />
+                  </video>
+                  <div style="margin: 0.1rem">
+                    <img src="static/videos/pipeline/arrow.png" />
+                  </div>
+                  <div>
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-around;
+                        color: black;
+                        font-size: 0.7rem;
+                      "
+                    >
+                      <span>Camera poses</span> <span>Per frame depth</span>
+                      <span>2D tracks</span>
+                    </div>
+                    <video
+                      id="pipeline_stage1"
+                      autoplay
+                      muted
+                      loop
+                      playsinline
+                      width="100%"
+                    >
+                      <source
+                        src="static/videos/pipeline/intermediate_output.mp4"
+                        type="video/mp4"
+                      />
+                    </video>
+                  </div>
+                </center>
+              </div>
+              <div class="content has-text-justified">
+                <p>
+                  We then fuse these quantities into a consistent 3D coordinate
+                  frame and get temporal consistent, high-quality
+                  reconstructions.
+                </p>
+                <center>
+                  <video
+                    id="pipeline_3d"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    width="100%"
+                  >
+                    <source
+                      src="static/videos/pipeline/9F_CaOaT9Xg-clip0-dyna_3dtrack_concated.mp4"
+                      type="video/mp4"
+                    />
+                  </video>
+                </center>
+              </div>
+
+              <div class="content has-text-justified">
+                <p>
+                  Denoising tracks: Depth estimates are often noisy from one
+                  frame to another. This results in jittery or noisy 3D tracks.
+                  We propose a 3D track optimization process that removes this
+                  noise.
+                </p>
+              </div>
+              <div class="columns is-centered is-vcentered">
+                <div class="column is-two-fifths">
+                  <!-- Left Video -->
+                  <video
+                    class="syncstart"
+                    muted
+                    loop
+                    playsinline
+                    preload="auto"
+                  >
+                    <source
+                      src="static/videos/track_optimization/crop-OHBI-441e00-clip23-2d-fix.mp4"
+                      type="video/mp4"
+                    />
+                  </video>
+                  <span style="color: black; font-size: 1rem"
+                    >Projected Tracks</span
+                  >
+                </div>
+                <div class="column is-three-fifths">
+                  <!-- Slider Comparison -->
+                  <div class="image-comparison">
+                    <div class="images-container">
+                      <video
+                        class="before-image syncstart"
+                        muted
+                        loop
+                        playsinline
+                        preload="auto"
+                      >
+                        <source
+                          src="static/videos/track_optimization/after3.mp4"
+                          type="video/mp4"
+                        />
+                      </video>
+                      <video
+                        class="after-image syncstart"
+                        muted
+                        loop
+                        playsinline
+                        preload="auto"
+                      >
+                        <source
+                          src="static/videos/track_optimization/before3.mp4"
+                          type="video/mp4"
+                        />
+                      </video>
+                      <div class="slider-line"></div>
+                      <div class="slider-icon">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke-width="1.5"
+                          stroke="currentColor"
+                          class="w-6 h-6"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
+                          />
+                        </svg>
+                      </div>
+                      <input type="range" class="slider" min="1" max="99" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--/ Pipeline. -->
+      </div>
+    </section>
+    <br />
+    <section class="">
+      <div class="container is-max-desktop">
+        <div class="hero-body nopadding">
+          <div
+            class="columns is-centered has-text-centered"
+            id="dynadust3r_result"
+          >
+            <div class="column is-four-fifths">
+              <h2 class="title is-3">
+                Using this data to learn how things move
+              </h2>
+              <p>
+                We propose DynaDUSt3R, an extension to
+                <a href="https://dust3r.europe.naverlabs.com/">DUSt3R</a>, given
+                a pair of frames from any real-world video, we can predict a
+                pair of 3D point clouds and the corresponding 3D motion
+                trajectories that connect them in time.
+              </p>
+
+              <div class="content has-text-justified">
+                <center>
+                  <!-- <video id="pipeline" autoplay muted loop playsinline width="90%">
                 <source src="static/videos/dynadust3r.mp4" type="video/mp4">
               </video> -->
 
-              <table style="margin-left: auto; margin-right: auto; width: 100%;">
-                <tr>
-                    <th style="text-align: center;width: 30%; border:none">Input image pair</th>
-                    <!-- <th style="text-align: center;width: 30%;">Fixed View<br>Varying Time</th>
+                  <table
+                    style="margin-left: auto; margin-right: auto; width: 100%"
+                  >
+                    <tr>
+                      <th style="text-align: center; width: 30%; border: none">
+                        Input image pair
+                      </th>
+                      <!-- <th style="text-align: center;width: 30%;">Fixed View<br>Varying Time</th>
                     <th style="text-align: center;width: 30%;">Varying View<br>Fixed Time</th> -->
-                    <th style="text-align: center;width: 70%; border:none">Reconstruction</th>
-                </tr>
-                <tr>
-                    <td style="text-align: center;width: 37%;">
-                      <img class="card-img" id="dynadust3r_input" src="static/videos/dynadust3r/cow/input.gif">
-                    </td>
-                    <td rowspan="1" colspan="2" style="width: 63%">
-                        <video id="dynadust3r_prediction" class="video" width=100% loop playsinline
-                            autoplay muted controls style="aspect-ratio:16/9;">
-                            <source src="static/videos/dynadust3r/cow/cow_fixed_horizon-fix.mp4" />
+                      <th style="text-align: center; width: 70%; border: none">
+                        Reconstruction
+                      </th>
+                    </tr>
+                    <tr>
+                      <td style="text-align: center; width: 37%">
+                        <img
+                          class="card-img"
+                          id="dynadust3r_input"
+                          src="static/videos/dynadust3r/cow/input.gif"
+                        />
+                      </td>
+                      <td rowspan="1" colspan="2" style="width: 63%">
+                        <video
+                          id="dynadust3r_prediction"
+                          class="video"
+                          width="100%"
+                          loop
+                          playsinline
+                          autoplay
+                          muted
+                          controls
+                          style="aspect-ratio: 16/9"
+                        >
+                          <source
+                            src="static/videos/dynadust3r/cow/cow_fixed_horizon-fix.mp4"
+                          />
                         </video>
-                    </td>
-                </tr>
-              </table>
+                      </td>
+                    </tr>
+                  </table>
 
-              <div class="pill-row scene-pills" id="cameratime-pills" role="group" aria-relevant="additions text">
-                <div class="pill scene-pill" data-value="cow">
-                    <img class="card-img" src="static/videos/dynadust3r/cow/rgb_00000.png">
-                </div>
-                <div class="pill scene-pill" data-value="park">
-                    <img class="card-img" src="static/videos/dynadust3r/park/rgb_00000.png">
-                </div>
-                <div class="pill scene-pill" data-value="rolling">
-                    <img class="card-img" src="static/videos/dynadust3r/rolling/rgb_00000.png">
-                </div>
-              </div>
-              </center>
-              <!-- <div class="columns is-centered">
+                  <div
+                    class="pill-row scene-pills"
+                    id="cameratime-pills"
+                    role="group"
+                    aria-relevant="additions text"
+                  >
+                    <div class="pill scene-pill" data-value="cow">
+                      <img
+                        class="card-img"
+                        src="static/videos/dynadust3r/cow/rgb_00000.png"
+                      />
+                    </div>
+                    <div class="pill scene-pill" data-value="park">
+                      <img
+                        class="card-img"
+                        src="static/videos/dynadust3r/park/rgb_00000.png"
+                      />
+                    </div>
+                    <div class="pill scene-pill" data-value="rolling">
+                      <img
+                        class="card-img"
+                        src="static/videos/dynadust3r/rolling/rgb_00000.png"
+                      />
+                    </div>
+                  </div>
+                </center>
+                <!-- <div class="columns is-centered">
                 <div class="column is-centered">
                     <div class="subtitle has-text-centered">
                       <font size="3">
@@ -487,55 +756,56 @@
                     </div>
                 </div>
               </div> -->
+              </div>
             </div>
           </div>
         </div>
       </div>
-</div>
-</section> 
+    </section>
 
-<br>
+    <br />
 
-<section class="section" id="Acknowledgements">
-  <div class="columns is-centered has-text-centered">
-    <div class="column is-four-fifths is-centered"><br><br>
-      <h2 class="title is-3">Acknowledgements</h2>
-      <div class="content has-text-centered">
-        <font size="3">
-          Thanks to Kyle Genova, Andrew Liu, Jon Barron, Philip Henzler, Stan Szymanowicz, Ruiqi Gao, Qianqian Wang for helpful proofreading, comments and discussions.
-        </font>
+    <section class="section" id="Acknowledgements">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths is-centered">
+          <br /><br />
+          <h2 class="title is-3">Acknowledgements</h2>
+          <div class="content has-text-centered">
+            <font size="3">
+              Thanks to Kyle Genova, Andrew Liu, Jon Barron, Philip Henzler,
+              Stan Szymanowicz, Ruiqi Gao, Qianqian Wang for helpful
+              proofreading, comments and discussions.
+            </font>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
- <br>
+    <br />
 
-
-
-<section class="section" id="BibTeX">
-  <div class="container is-max-desktop content">
-    <h2 class="title">BibTeX</h2>
-    <pre><code>@inproceedings{jin2024_Stereo4d,
+    <section class="section" id="BibTeX">
+      <div class="container is-max-desktop content">
+        <h2 class="title">BibTeX</h2>
+        <pre><code>@inproceedings{jin2024_Stereo4d,
   title  = {Stereo4D: Learning How Things Move in 3D from Internet Stereo Videos},
   author = {Jin, Linyi and Tucker, Richard and Li, Zhengqi and Fouhey, David and Snavely, Noah and Holynski, Aleksander},
   year   = {2024}
 }</code></pre>
-  </div>
-</section>
+      </div>
+    </section>
 
-
-<footer class="footer">
-  <div align="center" class="container">
-<div class="columns is-centered">
-        <div class="content">
-            This website is borrowed from <a href="https://github.com/nerfies/nerfies.github.io">nerfies</a>. Thanks <a href="https://keunhong.com">Keunhong</a>!
+    <footer class="footer">
+      <div align="center" class="container">
+        <div class="columns is-centered">
+          <div class="content">
+            This website is borrowed from
+            <a href="https://github.com/nerfies/nerfies.github.io">nerfies</a>.
+            Thanks <a href="https://keunhong.com">Keunhong</a>!
+          </div>
         </div>
       </div>
-    </div>
-</footer>
-<script src="./static/js/slider.js"></script>
-<script src="./static/js/dust3r_selection.js"></script>
-
-</body>
+    </footer>
+    <script src="./static/js/slider.js"></script>
+    <script src="./static/js/dust3r_selection.js"></script>
+  </body>
 </html>
