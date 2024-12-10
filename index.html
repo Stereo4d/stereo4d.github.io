@@ -345,7 +345,7 @@
         <h2 class="title is-3">How is it made?</h2>
         <div class="content has-text-justified">
           <p>
-          Stereoscopic fisheye videos from the internet are an untapped source of high-quality 4D data: (1) there are hundreds of thousands of them, and (2) since they're designed to capture immersive VR experiences, they have wide field-of-view stereo imagery with a standardized stereo baseline, precisely the kind of information that's useful in reconstructing pseudo-metric 4D scenes. These videos contain a pretty even spread of what we might see in everyday life---some examples are shown here:
+          Stereoscopic fisheye videos from the internet are an untapped source of high-quality 4D data: (1) there are hundreds of thousands of them, and (2) since they're designed to capture immersive VR experiences, they have wide field-of-view stereo imagery with a standardized stereo baseline, precisely the kind of information that's useful in reconstructing pseudo-metric 4D scenes. These videos contain a pretty even spread of what we might see in everyday life&mdash;some examples are shown here:
           </p>
           <center style="display: flex;align-items: center;">
             <div>
@@ -358,8 +358,7 @@
         </div>
         <div class="content has-text-justified">
           <p>
-          We present a pipeline that carefully combines state-of-the-art methods for stereo depth estimation and video tracking along with custom structure-from-motion methods that are optimized for dynamic scenes.
-          At a high-level, our pipeline estimates camera poses, stereo disparity, and 2D tracks from rectified video clips.
+          We process these videos with a careful combination of state-of-the-art methods for (1) stereo depth estimation, (2) video tracking, as well as (3) a bespoke structure-from-motion system optimized for dynamic stereo videos. From these methods, we can extract per-frame camera poses, per-pixel pseudo-metric depth from stereo disparity, and long-term 2D point tracks.
           </p>
           <center>
           <video id="pipeline_stage1" autoplay muted loop playsinline width="100%">
@@ -369,7 +368,7 @@
         </div>
         <div class="content has-text-justified">
           <p>
-          We then fuse these quantities into a consistent 3D coordinate frame and get temporal consistent, high-quality reconstructions.
+          We then fuse these quantities into 4D reconstructions, by lifting the 2D tracks into 3D with their depth, and aligning all the scene content by compensating for the known camera motion. This results in temporally consistent, high-quality dynamic reconstructions, with long-term correspondence over time.
           </p>
           <center>
           <video id="pipeline_3d" autoplay muted loop playsinline width="100%">
@@ -435,7 +434,7 @@
       <div class="hero-body nopadding">
         <div class="columns is-centered has-text-centered" id="dynadust3r_result">
           <div class="column is-four-fifths">
-            <h2 class="title is-3">Using this data to learn how things move</h2>
+            <h2 class="title is-3">Using this data to learn <em>how things move</em></h2>
             <p>
               We propose DynaDUSt3R, an extension to <a href="https://dust3r.europe.naverlabs.com/">DUSt3R</a>, given a pair of frames from any real-world video, we can predict a pair of 3D point clouds and the corresponding 3D motion trajectories that connect them in time. 
             </p>
