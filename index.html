@@ -159,7 +159,7 @@
       </center>
       <div class="columns is-centered">
         <div class="column is-centered rounded">
-<div class="notification is-link is-light" style="text-align: center; padding-bottom: 5px; padding-top: 5px; background-color: #d0d5ec;"> <h6 style="text-align: center; color:rgb(0, 0, 0)"><strong>TL;DR</strong>: Make a dataset of dynamic 3D reconstructions from hundreds of thousands of online stereoscopic videos.</h6></div>
+<div class="notification is-link is-light" style="text-align: center; padding-bottom: 5px; padding-top: 5px; background-color: #d0d5ec;"> <h6 style="text-align: center; color:rgb(0, 0, 0)"><strong>TL;DR</strong>: Create a dataset of real 4D scenes from hundreds of thousands of online stereoscopic videos.</h6></div>
         </div>
       </div>
     </div>
@@ -168,8 +168,9 @@
 
 <section class="hero is-light is-small">
   <div class="hero-body nopadding has-text-centered">
-        <h2 class="title is-3 has-text-centered" style="margin-bottom: 0em">Dataset gallery</h2>
-        <p class="is-6 has-text-centered">A collection of examples from our processed dataset, showing a wide variety of moving objects. Note that only dynamic tracks are visualized.</p><br>
+        <h2 class="title is-3 has-text-centered" style="margin-bottom: 5px">Dataset gallery</h2>
+        <p class="is-6 has-text-centered">Examples from our processed dataset, showing a wide variety of scenes and moving objects. 
+	Color trails are only shown for moving points, but all points have been reconstructed in 3D.</p><br>
     <div class="container">
       <div id="results-carousel" class="carousel results-carousel">
 
@@ -332,15 +333,19 @@
         </div>
       </div>
     </div>
+</div>
     <!--/ Abstract. -->
+</section>
+<section>
+  <div class="container is-max-desktop">
     <!-- Pipeline. -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Data collection</h2>
+	<div class="notification is-success is-light">
+        <h2 class="title is-3">How is it made?</h2>
         <div class="content has-text-justified">
           <p>
-          We identify online, stereoscopic fisheye videos (often referred to as VR180 videos) as an untapped source of data for leaning motion. 
-          These videos, designed to capture immersive VR experiences, provide wide field-of-view stereo imagery with a standardized stereo baseline. 
+          Stereoscopic fisheye videos from the internet are an untapped source of high-quality 4D data: (1) there are hundreds of thousands of them, and (2) since they're designed to capture immersive VR experiences, they have wide field-of-view stereo imagery with a standardized stereo baseline, precisely the kind of information that's useful in reconstructing pseudo-metric 4D scenes.
           </p>
           <center>
           <video id="pipeline" autoplay muted loop playsinline width="90%">
@@ -415,15 +420,19 @@
               </div>
             </div>
         </div>
+</div>
       </div>
     </div>
     <!--/ Pipeline. -->
-
-    <section class="hero is-light is-small">
+</div>
+</section>
+<br>
+<section class="">
+  <div class="container is-max-desktop">
       <div class="hero-body nopadding">
         <div class="columns is-centered has-text-centered" id="dynadust3r_result">
           <div class="column is-four-fifths">
-            <h2 class="title is-3">Learning a prior on how things move</h2>
+            <h2 class="title is-3">Using this data to learn how things move</h2>
             <p>
               We propose DynaDUSt3R, an extension to <a href="https://dust3r.europe.naverlabs.com/">DUSt3R</a>, given a pair of frames from any real-world video, we can predict a pair of 3D point clouds and the corresponding 3D motion trajectories that connect them in time. 
             </p>
@@ -479,8 +488,7 @@
           </div>
         </div>
       </div>
-    </section>
-  </div>
+</div>
 </section> 
 
 <br>
