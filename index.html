@@ -136,9 +136,6 @@
                 <span class="author-block"><sup>4</sup>UC Berkeley</span>
                 &nbsp&nbsp&nbsp&nbsp (*: equal contribution)
               </div>
-
-              <!-- <h1 style="font-size:24px;font-weight:bold">CVPR 2024 Best Paper Award</h1> -->
-
               <div class="column has-text-centered">
                 <div class="publication-links">
                   <span class="link-block">
@@ -152,8 +149,6 @@
                       <span>arXiv</span>
                     </a>
                   </span>
-                  <!-- Video Link. -->
-                  <!-- Supp Link. -->
                   <span class="link-block">
                     <a
                       class="external-link button is-normal is-rounded is-dark"
@@ -472,8 +467,8 @@
                   imagery with a standardized stereo baseline, precisely the
                   kind of information that's useful in reconstructing
                   pseudo-metric 4D scenes. These videos contain a pretty even
-                  spread of what we might see in everyday life---some examples
-                  are shown here:
+                  spread of what we might see in everyday life&mdash;some
+                  examples are shown here:
                 </p>
                 <center style="display: flex; align-items: center">
                   <div>
@@ -496,12 +491,13 @@
               </div>
               <div class="content has-text-justified">
                 <p>
-                  We present a pipeline that carefully combines state-of-the-art
-                  methods for stereo depth estimation and video tracking along
-                  with custom structure-from-motion methods that are optimized
-                  for dynamic scenes. At a high-level, our pipeline estimates
-                  camera poses, stereo disparity, and 2D tracks from rectified
-                  video clips.
+                  We process these videos with a careful combination of
+                  state-of-the-art methods for (1) stereo depth estimation, (2)
+                  video tracking, as well as (3) a bespoke structure-from-motion
+                  system optimized for dynamic stereo videos. From these
+                  methods, we can extract per-frame camera poses, per-pixel
+                  pseudo-metric depth from stereo disparity, and long-term 2D
+                  point tracks.
                 </p>
                 <center style="display: flex; align-items: center">
                   <video
@@ -532,14 +528,7 @@
                       <span>Camera poses</span> <span>Per frame depth</span>
                       <span>2D tracks</span>
                     </div>
-                    <video
-                      id="pipeline_stage1"
-                      autoplay
-                      muted
-                      loop
-                      playsinline
-                      width="100%"
-                    >
+                    <video autoplay muted loop playsinline width="100%">
                       <source
                         src="static/videos/pipeline/intermediate_output.mp4"
                         type="video/mp4"
@@ -550,9 +539,12 @@
               </div>
               <div class="content has-text-justified">
                 <p>
-                  We then fuse these quantities into a consistent 3D coordinate
-                  frame and get temporal consistent, high-quality
-                  reconstructions.
+                  We then fuse these quantities into 4D reconstructions, by
+                  lifting the 2D tracks into 3D with their depth, and aligning
+                  all the scene content by compensating for the known camera
+                  motion. This results in temporally consistent, high-quality
+                  dynamic reconstructions, with long-term correspondence over
+                  time.
                 </p>
                 <center>
                   <video
@@ -573,10 +565,15 @@
 
               <div class="content has-text-justified">
                 <p>
-                  Denoising tracks: Depth estimates are often noisy from one
-                  frame to another. This results in jittery or noisy 3D tracks.
-                  We propose a 3D track optimization process that removes this
-                  noise.
+                  This gives us pretty reasonable 4D scenes, but there's still
+                  work left to be done. The precision of stereo depth
+                  predictions may be limited by the content of the scene (e.g.,
+                  distant objects seen with small parallax may have a large
+                  variance of possible depth values&mdash;and can therefore vary
+                  signifcantly from one frame to another). This results in
+                  jittery or noisy 3D tracks. To compensate for this, we
+                  additionally perform an optimization process over the 3D
+                  trajectories that removes this noise.
                 </p>
               </div>
               <div class="columns is-centered is-vcentered">
@@ -664,22 +661,29 @@
           >
             <div class="column is-four-fifths">
               <h2 class="title is-3">
-                Using this data to learn how things move
+                Using this data to learn <em>how things move</em>
               </h2>
-              <p>
-                We propose DynaDUSt3R, an extension to
-                <a href="https://dust3r.europe.naverlabs.com/">DUSt3R</a>, given
-                a pair of frames from any real-world video, we can predict a
-                pair of 3D point clouds and the corresponding 3D motion
-                trajectories that connect them in time.
-              </p>
 
               <div class="content has-text-justified">
+                <p>
+                  To validate that our dataset is useful for learning about the
+                  structure and motion of real-world scenes, we use it to train
+                  a variant of
+                  <a href="https://dust3r.europe.naverlabs.com/">DUSt3R</a>.
+                  DUSt3R usually takes as input a pair of images, and predicts a
+                  3D point (in a shared coordinate frame) for each pixel in both
+                  images&mdash;but it fails when the scene is dynamic, e.g.,
+                  when there is scene motion between the two images. This comes
+                  largely as a consequence of the fact that DUSt3R is trained on
+                  static data (since there aren't very many sources of
+                  ground-truth dynamic 3D scenes). We extend DUSt3R by adding a
+                  notion of time&mdash;into a model that we call DynaDUSt3R, and
+                  train it on our Stereo4D dataset. Given a pair of frames from
+                  any real-world video, DynaDUSt3R predicts per-pixel 3D points
+                  for each frame, as well as the 3D motion trajectories that
+                  connect them in time.
+                </p>
                 <center>
-                  <!-- <video id="pipeline" autoplay muted loop playsinline width="90%">
-                <source src="static/videos/dynadust3r.mp4" type="video/mp4">
-              </video> -->
-
                   <table
                     style="margin-left: auto; margin-right: auto; width: 100%"
                   >
@@ -687,8 +691,6 @@
                       <th style="text-align: center; width: 30%; border: none">
                         Input image pair
                       </th>
-                      <!-- <th style="text-align: center;width: 30%;">Fixed View<br>Varying Time</th>
-                    <th style="text-align: center;width: 30%;">Varying View<br>Fixed Time</th> -->
                       <th style="text-align: center; width: 70%; border: none">
                         Reconstruction
                       </th>
@@ -747,15 +749,6 @@
                     </div>
                   </div>
                 </center>
-                <!-- <div class="columns is-centered">
-                <div class="column is-centered">
-                    <div class="subtitle has-text-centered">
-                      <font size="3">
-                      Given two images, DynaDUSt3R predicts a 3D point cloud for each, and a 3D trajectory map between the point clouds.
-                      </font>
-                    </div>
-                </div>
-              </div> -->
               </div>
             </div>
           </div>
