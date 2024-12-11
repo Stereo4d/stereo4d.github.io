@@ -201,3 +201,6 @@ body {
     height: 335px;
     object-fit: cover;
 }
+.container {
+  max-width: 100%;
+}
