@@ -1,2 +1,2 @@
-# jinlinyi.github.io/stereo4d
+# stereo4d.github.io
 Stereo4d website
