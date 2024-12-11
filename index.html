@@ -164,14 +164,14 @@
           <div class="columns is-centered">
             <div class="column is-centered is-four-fifths rounded">
               <div
-                class="notification is-primary"
+                class="notification is-info"
                 style="
                   text-align: center;
                   padding-bottom: 5px;
                   padding-top: 5px;
                 "
               >
-                <h6 style="text-align: center; color: rgb(255, 255, 255)">
+                <h6 style="text-align: center; color: rgb(0, 0, 0)">
                   <strong>TL;DR</strong>: Use stereo videos from the internet to create a dataset of over 100,000 real-world 4D scenes
                   with <em>metric scale</em> and <em>long-term 3D motion trajectories</em>.
                 </h6>
@@ -384,7 +384,7 @@
         <!-- Pipeline. -->
         <div class="columns is-centered has-text-centered">
           <div class="column is-four-fifths">
-            <div class="notification is-success is-light">
+            <div class="notification is-info is-light">
               <h2 class="title is-3">How is it made?</h2>
               <div class="content has-text-justified">
                 <p>
@@ -599,8 +599,8 @@
                   a variant of
                   <a href="https://dust3r.europe.naverlabs.com/">DUSt3R</a>.
                   DUSt3R usually takes as input a pair of images, and predicts a
-                  3D point (in a shared coordinate frame) for each pixel in both
-                  images&mdash;but it fails when the scene is dynamic, e.g.,
+                  3D point for each pixel in both
+                  images (in a shared coordinate frame)&mdash;but it fails when the scene is dynamic, e.g.,
                   when there is scene motion between the two images. This comes
                   largely as a consequence of the fact that DUSt3R is trained on
                   static data (since there aren't very many sources of
@@ -720,7 +720,7 @@
             <div class="column is-four-fifths is-centered">
               <br /><br />
               <h2 class="title is-3">Acknowledgements</h2>
-              <div class="content has-text-centered">
+              <div class="content has-text-justified">
                 <font size="3">
                   Thanks to Jon Barron, Ruiqi Gao, Kyle Genova, Philipp Henzler, Erika Lu, Andrew Liu, Qianqian Wang, Rundi Wu, and Richard Szeliski for their helpful proofreading, comments, and discussions. 
                   Thanks to Carl Doersch, Skanda Koppula, and Ignacio Rocco for their assistance with TAPVid-3D and BootsTAP. 
@@ -751,8 +751,7 @@
         <div class="columns is-centered">
           <div class="content">
             This website is borrowed from
-            <a href="https://github.com/nerfies/nerfies.github.io">nerfies</a>.
-            Thanks <a href="https://keunhong.com">Keunhong</a>!
+            <a href="https://github.com/nerfies/nerfies.github.io">nerfies</a> and <a href="https://cat3d.github.io/">CAT3D</a>
           </div>
         </div>
       </div>
