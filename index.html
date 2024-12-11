@@ -168,74 +168,11 @@
       </div>
     </section>
 
-    <section class="hero teaser">
-      <div class="container is-max-desktop">
-        <div class="hero-body">
-          <center>
-            <video id="teaser" autoplay muted loop playsinline width="90%">
-              <source src="static/videos/teaser.mp4" type="video/mp4" />
-            </video>
-          </center>
-          <div class="columns is-centered">
-            <div class="column is-centered rounded">
-              <div
-                class="notification is-link is-light"
-                style="
-                  text-align: center;
-                  padding-bottom: 5px;
-                  padding-top: 5px;
-                  background-color: #d0d5ec;
-                "
-              >
-                <h6 style="text-align: center; color: rgb(0, 0, 0)">
-                  <strong>TL;DR</strong>: Create a dataset of real 4D scenes
-                  from hundreds of thousands of online stereoscopic videos.
-                </h6>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container is-max-desktop">
-        <!-- Abstract. -->
-        <div class="columns is-centered has-text-centered">
-          <div class="column is-four-fifths">
-            <h2 class="title is-3">Abstract</h2>
-            <div class="content has-text-justified">
-              <p>
-                Learning to understand dynamic 3D scenes from imagery is crucial
-                for applications ranging from robotics to scene reconstruction.
-                Yet, unlike other problems where large-scale supervised training
-                has enabled rapid progress, directly supervising methods for
-                recovering 3D motion remains challenging due to the fundamental
-                difficulty of obtaining ground truth annotations. We present a
-                system for mining high-quality 4D reconstructions from internet
-                stereoscopic, wide-angle videos. Our system fuses and filters
-                the outputs of camera pose estimation, stereo depth estimation,
-                and temporal tracking methods into high-quality dynamic 3D
-                reconstructions. We use this method to generate large-scale data
-                in the form of world-consistent, pseudo-metric 3D point clouds
-                with long-term motion trajectories. We demonstrate the utility
-                of this data by training a variant of DUSt3R to predict
-                structure and 3D motion from real-world image pairs, showing
-                that training on our reconstructed data enables generalization
-                to diverse real-world scenes.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--/ Abstract. -->
-    </section>
-
     <section class="hero is-light is-small">
       <div class="hero-body nopadding has-text-centered">
-        <h2 class="title is-3 has-text-centered" style="margin-bottom: 5px">
+        <!-- <h2 class="title is-3 has-text-centered" style="margin-bottom: 5px">
           Dataset gallery
-        </h2>
+        </h2> -->
         <p class="is-6 has-text-centered">
           Examples from our processed dataset, showing a wide variety of scenes
           and moving objects. Color trails are only shown for moving points, but
@@ -387,6 +324,69 @@
         </div>
       </div>
     </section>
+    <section class="hero teaser">
+      <div class="container is-max-desktop">
+        <div class="hero-body">
+          <!-- <center>
+            <video id="teaser" autoplay muted loop playsinline width="90%">
+              <source src="static/videos/teaser.mp4" type="video/mp4" />
+            </video>
+          </center> -->
+          <div class="columns is-centered">
+            <div class="column is-centered rounded">
+              <div
+                class="notification is-link is-light"
+                style="
+                  text-align: center;
+                  padding-bottom: 5px;
+                  padding-top: 5px;
+                  background-color: #d0d5ec;
+                "
+              >
+                <h6 style="text-align: center; color: rgb(0, 0, 0)">
+                  <strong>TL;DR</strong>: Create a dataset of real 4D scenes
+                  from hundreds of thousands of online stereoscopic videos.
+                </h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container is-max-desktop">
+        <!-- Abstract. -->
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Abstract</h2>
+            <div class="content has-text-justified">
+              <p>
+                Learning to understand dynamic 3D scenes from imagery is crucial
+                for applications ranging from robotics to scene reconstruction.
+                Yet, unlike other problems where large-scale supervised training
+                has enabled rapid progress, directly supervising methods for
+                recovering 3D motion remains challenging due to the fundamental
+                difficulty of obtaining ground truth annotations. We present a
+                system for mining high-quality 4D reconstructions from internet
+                stereoscopic, wide-angle videos. Our system fuses and filters
+                the outputs of camera pose estimation, stereo depth estimation,
+                and temporal tracking methods into high-quality dynamic 3D
+                reconstructions. We use this method to generate large-scale data
+                in the form of world-consistent, pseudo-metric 3D point clouds
+                with long-term motion trajectories. We demonstrate the utility
+                of this data by training a variant of DUSt3R to predict
+                structure and 3D motion from real-world image pairs, showing
+                that training on our reconstructed data enables generalization
+                to diverse real-world scenes.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+    </section>
+
     <section>
       <div class="container is-max-desktop">
         <!-- Pipeline. -->

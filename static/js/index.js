@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
   var options = {
     slidesToScroll: 1,
-    slidesToShow: 2,
+    slidesToShow: 1,
     loop: true,
     infinite: true,
-    pagination: false,
+    pagination: true,
     autoplay: true,
     autoplaySpeed: 5000,
   };
