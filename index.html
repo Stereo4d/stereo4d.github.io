@@ -198,6 +198,39 @@
       </div>
     </section>
 
+    <section class="section">
+      <div class="container is-max-desktop">
+        <!-- Abstract. -->
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Abstract</h2>
+            <div class="content has-text-justified">
+              <p>
+                Learning to understand dynamic 3D scenes from imagery is crucial
+                for applications ranging from robotics to scene reconstruction.
+                Yet, unlike other problems where large-scale supervised training
+                has enabled rapid progress, directly supervising methods for
+                recovering 3D motion remains challenging due to the fundamental
+                difficulty of obtaining ground truth annotations. We present a
+                system for mining high-quality 4D reconstructions from internet
+                stereoscopic, wide-angle videos. Our system fuses and filters
+                the outputs of camera pose estimation, stereo depth estimation,
+                and temporal tracking methods into high-quality dynamic 3D
+                reconstructions. We use this method to generate large-scale data
+                in the form of world-consistent, pseudo-metric 3D point clouds
+                with long-term motion trajectories. We demonstrate the utility
+                of this data by training a variant of DUSt3R to predict
+                structure and 3D motion from real-world image pairs, showing
+                that training on our reconstructed data enables generalization
+                to diverse real-world scenes.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+    </section>
+
     <section class="hero is-light is-small">
       <div class="hero-body nopadding has-text-centered">
         <h2 class="title is-3 has-text-centered" style="margin-bottom: 5px">
@@ -284,6 +317,21 @@
               <div class="item videostack">
                 <video class="video-shadow" autoplay muted loop playsinline>
                   <source
+                    src="static/videos/stereo4d-gallery/7pxhAFrmIQs-clip9-2d.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+                <video class="video-main" autoplay muted loop playsinline>
+                  <source
+                    src="static/videos/stereo4d-gallery/7pxhAFrmIQs-clip9.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+              </div>
+              <!-- CMwZrkhQ0ck-clip28
+              <div class="item videostack">
+                <video class="video-shadow" autoplay muted loop playsinline>
+                  <source
                     src="static/videos/stereo4d-gallery/CMwZrkhQ0ck-clip28-2d.mp4"
                     type="video/mp4"
                   />
@@ -294,7 +342,7 @@
                     type="video/mp4"
                   />
                 </video>
-              </div>
+              </div> -->
               <br />
               <!-- 7YAIbIXy67Y-clip30 -->
               <div class="item videostack">
@@ -418,39 +466,6 @@
         </div>
       </div>
     </section>
-
-    <section class="section">
-      <div class="container is-max-desktop">
-        <!-- Abstract. -->
-        <div class="columns is-centered has-text-centered">
-          <div class="column is-four-fifths">
-            <h2 class="title is-3">Abstract</h2>
-            <div class="content has-text-justified">
-              <p>
-                Learning to understand dynamic 3D scenes from imagery is crucial
-                for applications ranging from robotics to scene reconstruction.
-                Yet, unlike other problems where large-scale supervised training
-                has enabled rapid progress, directly supervising methods for
-                recovering 3D motion remains challenging due to the fundamental
-                difficulty of obtaining ground truth annotations. We present a
-                system for mining high-quality 4D reconstructions from internet
-                stereoscopic, wide-angle videos. Our system fuses and filters
-                the outputs of camera pose estimation, stereo depth estimation,
-                and temporal tracking methods into high-quality dynamic 3D
-                reconstructions. We use this method to generate large-scale data
-                in the form of world-consistent, pseudo-metric 3D point clouds
-                with long-term motion trajectories. We demonstrate the utility
-                of this data by training a variant of \duster to predict
-                structure and 3D motion from real-world image pairs, showing
-                that training on our reconstructed data enables generalization
-                to diverse real-world scenes.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--/ Abstract. -->
-    </section>
     <section>
       <div class="container is-max-desktop">
         <!-- Pipeline. -->
@@ -493,7 +508,7 @@
                 <p>
                   We process these videos with a careful combination of
                   state-of-the-art methods for (1) stereo depth estimation, (2)
-                  video tracking, as well as (3) a bespoke structure-from-motion
+                  2D point tracking, as well as (3) a stereo structure-from-motion
                   system optimized for dynamic stereo videos. From these
                   methods, we can extract per-frame camera poses, per-pixel
                   pseudo-metric depth from stereo disparity, and long-term 2D
@@ -745,6 +760,30 @@
                       <img
                         class="card-img"
                         src="static/videos/dynadust3r/rolling/rgb_00000.png"
+                      />
+                    </div>
+                    <div class="pill scene-pill" data-value="dog_on_field">
+                      <img
+                        class="card-img"
+                        src="static/videos/dynadust3r/dog_on_field/rgb_00000.png"
+                      />
+                    </div>
+                    <div class="pill scene-pill" data-value="exhibition">
+                      <img
+                        class="card-img"
+                        src="static/videos/dynadust3r/exhibition/rgb_00000.png"
+                      />
+                    </div>
+                    <div class="pill scene-pill" data-value="guitar">
+                      <img
+                        class="card-img"
+                        src="static/videos/dynadust3r/guitar/rgb_00000.png"
+                      />
+                    </div>
+                    <div class="pill scene-pill" data-value="museum">
+                      <img
+                        class="card-img"
+                        src="static/videos/dynadust3r/museum/rgb_00000.png"
                       />
                     </div>
                   </div>
