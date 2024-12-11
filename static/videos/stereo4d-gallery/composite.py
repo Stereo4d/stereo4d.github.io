@@ -94,6 +94,7 @@ mp4s = [f for f in os.listdir('.') if '-2d.mp4' in f]
 os.makedirs('composite', exist_ok=True)
 for mp4_f in mp4s:
   vid = mp4_f.split('-2d.mp4')[0]
+  vid = 'ko2x2dcU9PI-clip13'
   # print(vid)
   # Paths to your videos
   square_video_path = vid + "-2d.mp4"
@@ -111,3 +112,4 @@ for mp4_f in mp4s:
     </video>
   </div>
 </div>""")
+  break
