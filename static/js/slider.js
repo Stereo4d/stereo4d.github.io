@@ -69,7 +69,7 @@ function syncVideos() {
 
 // Attach event listeners to ensure all videos are ready
 videos.forEach(video => {
-  video.addEventListener("canplaythrough", videoLoaded, { once: true });
+  video.addEventListener("canplay", videoLoaded, { once: true });
   video.addEventListener("timeupdate", syncVideos);
 });
 
