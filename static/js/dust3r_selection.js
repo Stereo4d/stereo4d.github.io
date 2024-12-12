@@ -22,7 +22,7 @@ function updateDisplayCameraTime() {
             scenePill.classList.remove('active')
         }
     }
-    showVideo_cameratime.src = `static/videos/dynadust3r/${activeScene_cameratime}/${activeScene_cameratime}_fixed_horizon-fix.mp4`
+    showVideo_cameratime.src = `static/videos/dynadust3r/${activeScene_cameratime}/${activeScene_cameratime}_fixed_horizon-fix_compressed.mp4`
     showVideo_cameratime.playbackRate = 2.0;
     showGif_cameratime.src = `static/videos/dynadust3r/${activeScene_cameratime}/input.gif`
 }
