@@ -31,9 +31,17 @@ function updateSliderHover(event) {
   const percentage = Math.max(0, Math.min(100, (mouseX / rect.width) * 100)); // Ensure value is between 0 and 100
   updateSlider(percentage)
 }
+// .. or touch
+function updateSliderTouch(event) {
+  const rect = sliderContainer.getBoundingClientRect(); // Get the bounding box of the container
+  const touchX = event.pageX - (rect.left + window.scrollX); // Calculate the touch X position relative to the container
+  const percentage = Math.max(0, Math.min(100, (touchX / rect.width) * 100)); // Ensure value is between 0 and 100
+  updateSlider(percentage)
+}
 
 // Attach the mousemove event listener to the container
 sliderContainer.addEventListener("mousemove", updateSliderHover);
+sliderContainer.addEventListener("touchmove", updateSliderTouch);
 
 // Function to check if all videos are ready to play
 function videoLoaded() {
